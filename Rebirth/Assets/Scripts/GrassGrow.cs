@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 
-public class GrassGrow : MonoBehaviour {
+public class GrassBehavior : MonoBehaviour, IPointerDownHandler {
 
 	public static GrassGrow access;
 
@@ -32,15 +33,7 @@ public class GrassGrow : MonoBehaviour {
 	
 	}
 
-	void OnMouseEnter()
-	{
-		startcolor = GetComponent<Renderer>().material.color;
-		GetComponent<Renderer>().material.color = Color.yellow;
-	}
-	void OnMouseExit()
-	{
-		GetComponent<Renderer>().material.color = startcolor;
-	}
+	
 
 	public void Irrigate() {
 
@@ -53,14 +46,22 @@ public class GrassGrow : MonoBehaviour {
 			"time", 300f
 		));
 	}
-
+    void OnPointerEnter()
+	{
+		startcolor = GetComponent<Renderer>().material.color;
+		GetComponent<Renderer>().material.color = Color.yellow;
+	}
+	void OnPointerExit()
+	{
+		GetComponent<Renderer>().material.color = startcolor;
+	}
 	// This function is triggered when the mouse cursor is over the GameObject on which this script runs
-	void OnMouseOver()
+	void OnPointerDown()
 	{
 
 		// If the left mouse button is pressed
 		if (Input.GetMouseButtonDown(0))
-		{
+		{ 
 			// Display a message in the Console tab
 			Debug.Log("Left click!");
 			leftClicked = true;
