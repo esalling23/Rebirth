@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
-public class MangroveBehavior : MonoBehaviour {
+public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
 	
 	public Color color;
 	public float speed;
@@ -17,33 +18,41 @@ public class MangroveBehavior : MonoBehaviour {
 	void Update () {
 	
 	}
-	void OnMouseOver()
+	public void OnPointerEnter(PointerEventData e)
 	{
-		// If the left mouse button is pressed
-		if (Input.GetMouseButtonDown(0))
-		{
-			// Display a message in the Console tab
-			Debug.Log("Left click!");
-			
-			//			Info.SetActive(true);
-			
-			
+		//Events.instance.Raise (new ClickResourceEvent (this));
+	}
+
+	public void OnPointerExit(PointerEventData e)
+	{
+		//Events.instance.Raise (new ClickResourceEvent (this));
+	}
+
+	public void OnPointerDown(PointerEventData e)
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, 2f)) {
+			Debug.DrawLine (ray.origin, hit.point);
+			if (hit.collider) {
+				Events.instance.Raise (new ClickResourceEvent (this));
+				Debug.Log ("yes oil!");
+			}
 		}
 		
-		// If the right mouse button is pressed
-		if (Input.GetMouseButtonDown(1))
-		{
-			// Display a message in the Console tab
-			Debug.Log("Right click!");
-			iTween.MoveBy(Top,iTween.Hash(
-				"y"   , 2.2,
-				"time", 200f
-				));
-			iTween.MoveBy(Roots,iTween.Hash(
-				"y"   , .8,
-				"time", 100f
-				));
-			
-		}
+		
+	}
+	
+	public void Behavior ()
+	{
+		Debug.Log("Mangrove Growing!");
+		iTween.MoveBy(Top,iTween.Hash(
+			"y"   , 2.2,
+			"time", 200f
+			));
+		iTween.MoveBy(Roots,iTween.Hash(
+			"y"   , .8,
+			"time", 100f
+			));
 	}
 }

@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class LoadGame : MonoBehaviour {
-
-
+	
 	public GameObject loadingScreen;
 
 	public void LoadLevel (int level) {
