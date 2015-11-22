@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IResource : MonoBehaviour {
+public interface IResource {
 
-    void OnSelect();
+    void Behavior();
 
 }
