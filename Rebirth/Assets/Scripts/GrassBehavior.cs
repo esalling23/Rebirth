@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler, IResource {
+public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
 	public static GrassBehavior access;
 
@@ -22,11 +22,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
 			));
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	
 	public void Behavior () {
@@ -43,22 +39,22 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IPointerEnterHa
 
 	}
 	
-    public void OnPointerEnter(PointerEventData e)
+    public void OnMouseEnter()
 	{
 		Debug.Log ("Highlight Grass!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", highlight, 
-			"time", 1f
+			"time", .1f
 
 			));
 	}
 
-	public void OnPointerExit(PointerEventData e)
+	public void OnMouseExit()
 	{
 		Debug.Log ("Unhighlight Grass!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", color,
-			"time", 1f
+			"time", .1f
 			));
 	}
 
