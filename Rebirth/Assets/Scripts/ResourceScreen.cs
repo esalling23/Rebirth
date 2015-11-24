@@ -5,11 +5,11 @@ using System.Collections;
 public class ResourceScreen : MonoBehaviour {
 
 	public GameObject OilInfo;
-	//public GameObject TrashInfo;
+	public GameObject TrashInfo;
 	public GameObject GrassInfo;
-	//public GameObject FernInfo;
-	//public GameObject PalmInfo;
-	//public GameObject PineInfo;
+	public GameObject FernInfo;
+	public GameObject PalmInfo;
+	public GameObject PineInfo;
 	public GameObject MangroveInfo;
 
 
@@ -21,6 +21,7 @@ public class ResourceScreen : MonoBehaviour {
 
 	void OnClickResourceEvent(ClickResourceEvent e) {
 		if (e.resource is GrassBehavior) {
+            Debug.Log("hi");
 			GrassInfo.SetActive(true);
 		}
 		if (e.resource is OilBehavior) {
@@ -29,5 +30,14 @@ public class ResourceScreen : MonoBehaviour {
 		if (e.resource is MangroveBehavior) {
 			MangroveInfo.SetActive(true);
 		}
-	}
+        if (e.resource is TrashBehavior)
+        {
+           TrashInfo.SetActive(true);
+        }
+        if (e.resource is PalmBehavior)
+        {
+            PalmInfo.SetActive(true);
+        }
+       
+    }
 }

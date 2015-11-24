@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
+public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
 	public Color color;
 	public Color clean;
@@ -10,10 +10,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler, IPoint
 	public GameObject oilInfo;
 
 	void Start () {
-		iTween.ColorTo (gameObject, iTween.Hash (
-			"color", color
-			
-			));	
+		
 	}
 
 	public void Behavior () {
@@ -26,26 +23,26 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler, IPoint
 		oilInfo.SetActive (false);
 	}
 
+    public void OnMouseEnter()
+    {
+        Debug.Log("Highlight Oil!");
+        iTween.ColorTo(gameObject, iTween.Hash(
+            "color", highlight,
+            "time", .1f
 
-	public void OnPointerEnter(PointerEventData e)
-	{
-		Debug.Log ("Highlight Grass!");
-		iTween.ColorTo (gameObject, iTween.Hash (
-			"color", highlight,
-			"time", 1f
-		));	
-	}
+            ));
+    }
 
-	public void OnPointerExit(PointerEventData e)
-	{
-		Debug.Log ("Highlight Grass!");
-		iTween.ColorTo (gameObject, iTween.Hash (
-			"color", color,
-			"time", 1f
-		));	
-	}
+    public void OnMouseExit()
+    {
+        Debug.Log("Unhighlight Oil!");
+        iTween.ColorTo(gameObject, iTween.Hash(
+            "color", color,
+            "time", .1f
+            ));
+    }
 
-	public void OnPointerDown(PointerEventData e)
+    public void OnPointerDown(PointerEventData e)
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
