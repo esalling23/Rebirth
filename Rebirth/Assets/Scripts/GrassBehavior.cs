@@ -31,10 +31,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 			"color", green, 
 			"time", 200f
 			));
-		iTween.MoveBy (gameObject, iTween.Hash (
-			"y", .4,
-			"time", 300f
-			));
+
 		grassInfo.SetActive (false);
 
 	}

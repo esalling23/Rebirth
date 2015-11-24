@@ -10,7 +10,7 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
 
 	// Use this for initialization
 	void Start () {
-        GetComponent<Animation>().Play("Idle");
+        //GetComponent<Animation>().Play("Idle");
     }
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
     {
         Debug.Log("Palm Growing!");
         //play animation
-        GetComponent<Animation>().Play("Grow");
+        this.GetComponent<Animation>().Play("PalmGrow");
        palmInfo.SetActive(false);
     }
 

@@ -29,7 +29,7 @@ public class OilAnimate : MonoBehaviour, IResource, IPointerDownHandler, IPointe
 
 	public void OnPointerEnter(PointerEventData e)
 	{
-		Debug.Log ("Highlight Grass!");
+		Debug.Log ("Highlight oil!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", highlight,
 			"time", 1f
@@ -38,7 +38,7 @@ public class OilAnimate : MonoBehaviour, IResource, IPointerDownHandler, IPointe
 
 	public void OnPointerExit(PointerEventData e)
 	{
-		Debug.Log ("Highlight Grass!");
+		Debug.Log ("unHighlight oil!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", color,
 			"time", 1f

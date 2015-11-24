@@ -8,14 +8,19 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     public Color color;
     public Color highlight;
 
-	// Use this for initialization
-	void Start () {
+	float originalY;
 	
+	public float floatStrength = .1f; // You can change this in the Unity Editor to 
+	// change the range of y positions that are possible.
+	
+	void Start()
+	{
+		this.originalY = this.transform.position.y;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update()
+	{
+		transform.position = new Vector3(transform.position.x, originalY + ((float)Mathf.Sin(Time.time) * floatStrength),transform.position.z);
 	}
 
     public void Behavior()
@@ -54,6 +59,7 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
             {
                 Events.instance.Raise(new ClickResourceEvent(this));
                 Debug.Log("yes trash!");
+				gameObject.SetActive(false);
             }
         }
     }
