@@ -7,22 +7,31 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
     public GameObject palmInfo;
     public Color highlight;
     public Color color;
+	private bool palming;
+
+	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
+		palming = false;
+		anim = GetComponent<Animator>();
         //GetComponent<Animation>().Play("Idle");
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+		// Cache the attention attracting input.
+		bool OnClick = Input.GetButtonDown("Grow");
+		
+		// Set the animator shouting parameter.
+		anim.SetBool(hash.shoutingBool, shout);
 	}
 
     public void Behavior()
     {
         Debug.Log("Palm Growing!");
         //play animation
-        this.GetComponent<Animation>().Play("PalmGrow");
+        this.GetComponent<Animator>().Play("PalmGrow");
        palmInfo.SetActive(false);
     }
 
@@ -55,8 +64,11 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider)
             {
-                Events.instance.Raise(new ClickResourceEvent(this));
+                //Events.instance.Raise(new ClickResourceEvent(this));
                 Debug.Log("yes palm!");
+				palming = true;
+				this.GetComponent<Animator>().OnClick;
+
             }
         }
 

@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\OilManager.cs" />
      <Compile Include="Assets\Scripts\OnClickCubeUI.cs" />
      <Compile Include="Assets\Scripts\PalmBehavior.cs" />
+     <Compile Include="Assets\Scripts\PalmsAnimate.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\ResourceScreen.cs" />
      <Compile Include="Assets\Scripts\TextureEditor\Noise.cs" />

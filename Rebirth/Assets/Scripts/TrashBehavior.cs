@@ -15,12 +15,12 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 	
 	void Start()
 	{
-		this.originalY = this.transform.position.y;
+		//this.originalY = this.transform.position.y;
 	}
 	
 	void Update()
 	{
-		transform.position = new Vector3(transform.position.x, originalY + ((float)Mathf.Sin(Time.time) * floatStrength),transform.position.z);
+		//transform.position = new Vector3(transform.position.x, originalY + ((float)Mathf.Sin(Time.time) * floatStrength),transform.position.z);
 	}
 
     public void Behavior()
