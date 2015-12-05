@@ -1,34 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PalmBehavior.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GrassBehavior.cs">
     <Files>
-      <File FileName="Assets/Scripts/PalmsAnimate.cs" Line="9" Column="5" />
-      <File FileName="Assets/Scripts/TrashBehavior.cs" Line="23" Column="5" />
+      <File FileName="Assets/Scripts/GameMaster.cs" Line="2" Column="22" />
+      <File FileName="Assets/Scripts/PalmBehavior.cs" Line="42" Column="57" />
+      <File FileName="Assets/Scripts/TrashBehavior.cs" Line="29" Column="57" />
       <File FileName="Assets/Scripts/DevelopmentTemps/OilAnimate.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GrassBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/DevelopmentTemps/GrassAnimate.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LoadGame.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MangroveBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PalmBehavior.cs" Line="24" Column="43" />
-      <File FileName="Assets/Scripts/OilBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/OilBehavior.cs" Line="29" Column="57" />
+      <File FileName="Assets/Scripts/GrassBehavior.cs" Line="52" Column="5" />
+      <File FileName="Assets/Scripts/ResourceStats.cs" Line="10" Column="1" />
+      <File FileName="Assets/Scripts/HoverResourceEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ClickResourceEvent.cs" Line="1" Column="1" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="DevelopmentTemps" expanded="True" />
-              <Node name="TextureEditor" expanded="True" />
-              <Node name="PalmBehavior.cs" selected="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Scripts" expanded="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

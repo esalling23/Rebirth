@@ -26,6 +26,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     public void OnMouseEnter()
     {
         Debug.Log("Highlight Oil!");
+		Events.instance.Raise (new HoverResourceEvent (this));
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", highlight,
             "time", .1f

@@ -38,7 +38,8 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 	
     public void OnMouseEnter()
 	{
-		Debug.Log ("Highlight Grass!");
+		//Debug.Log ("Highlight Grass!");
+		Events.instance.Raise (new HoverResourceEvent (this));
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", highlight, 
 			"time", .1f
@@ -48,7 +49,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
 	public void OnMouseExit()
 	{
-		Debug.Log ("Unhighlight Grass!");
+		//Debug.Log ("Unhighlight Grass!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", color,
 			"time", .1f

@@ -15,31 +15,32 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
 	void Start () {
 		palming = false;
 		anim = GetComponent<Animator>();
-        //GetComponent<Animation>().Play("Idle");
     }
 	
 	// Update is called once per frame
 	void Update () {
 		// Cache the attention attracting input.
-		bool OnClick = Input.GetButtonDown("Grow");
+		//bool OnClick = Input.GetButtonDown("Grow");
 		
 		// Set the animator shouting parameter.
-		anim.SetBool(hash.shoutingBool, shout);
+		//anim.SetBool(hash.shoutingBool, shout);
 	}
 
     public void Behavior()
     {
         Debug.Log("Palm Growing!");
         //play animation
-        this.GetComponent<Animator>().Play("PalmGrow");
-       palmInfo.SetActive(false);
+       //this.GetComponent<Animator>().Play("PalmGrow");
+		anim.SetTrigger ("Palming");
+        palmInfo.SetActive(false);
     }
 
 
     public void OnMouseEnter()
     {
-        Debug.Log("Highlight Palm!");
-        iTween.ColorTo(gameObject, iTween.Hash(
+        //Debug.Log("Highlight Palm!");
+		Events.instance.Raise (new HoverResourceEvent (this));
+		iTween.ColorTo(gameObject, iTween.Hash(
             "color", highlight,
             "time", .1f
 
@@ -48,7 +49,7 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
 
     public void OnMouseExit()
     {
-        Debug.Log("Unhighlight Palm!");
+       // Debug.Log("Unhighlight Palm!");
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", color,
             "time", .1f
@@ -59,7 +60,7 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 2f))
+        if (Physics.Raycast(ray, out hit, 3f))
         {
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider)
@@ -67,8 +68,7 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
                 //Events.instance.Raise(new ClickResourceEvent(this));
                 Debug.Log("yes palm!");
 				palming = true;
-				this.GetComponent<Animator>().OnClick;
-
+				anim.SetTrigger ("Palming");
             }
         }
 

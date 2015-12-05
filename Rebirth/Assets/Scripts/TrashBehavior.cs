@@ -8,31 +8,26 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     public Color color;
     public Color highlight;
 
-	float originalY;
-	
-	public float floatStrength = .1f; // You can change this in the Unity Editor to 
-	// change the range of y positions that are possible.
-	
+
 	void Start()
 	{
-		//this.originalY = this.transform.position.y;
 	}
 	
 	void Update()
 	{
-		//transform.position = new Vector3(transform.position.x, originalY + ((float)Mathf.Sin(Time.time) * floatStrength),transform.position.z);
 	}
 
     public void Behavior()
     {
-        gameObject.SetActive(false);
+       gameObject.SetActive(false);
 
     }
 
     public void OnMouseEnter()
     {
-        Debug.Log("Highlight Trash!");
-        iTween.ColorTo(gameObject, iTween.Hash(
+        //Debug.Log("Highlight Trash!");
+		Events.instance.Raise (new HoverResourceEvent (this));
+		iTween.ColorTo(gameObject, iTween.Hash(
             "color", highlight,
             "time", .1f
 
@@ -41,7 +36,7 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
     public void OnMouseExit()
     {
-        Debug.Log("Unhighlight Trash!");
+        //Debug.Log("Unhighlight Trash!");
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", color,
             "time", .1f
