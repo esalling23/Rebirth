@@ -54,7 +54,7 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
             {
                 Events.instance.Raise(new ClickResourceEvent(this));
                 Debug.Log("yes trash!");
-				gameObject.SetActive(false);
+				//gameObject.SetActive(false);
             }
         }
     }

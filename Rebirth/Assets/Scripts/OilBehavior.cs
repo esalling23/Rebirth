@@ -7,7 +7,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 	public Color color;
 	public Color clean;
 	public Color highlight;
-	public GameObject oilInfo;
+	//public GameObject oilInfo;
 
 	void Start () {
 		
@@ -20,7 +20,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 			"color", clean, 
 			"time", 200f
 			));
-		oilInfo.SetActive (false);
+		//oilInfo.SetActive (false);
 	}
 
     public void OnMouseEnter()
@@ -29,7 +29,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 		Events.instance.Raise (new HoverResourceEvent (this));
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", highlight,
-            "time", .1f
+            "time", .01f
 
             ));
     }
@@ -39,7 +39,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
         Debug.Log("Unhighlight Oil!");
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", color,
-            "time", .1f
+            "time", .01f
             ));
     }
 
@@ -52,6 +52,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 			if (hit.collider) {
 				Events.instance.Raise (new ClickResourceEvent (this));
 				Debug.Log ("yes oil!");
+				//Behavior ();
 			}
 		}
 

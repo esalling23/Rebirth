@@ -9,6 +9,8 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 	public GameObject Roots;
 	public GameObject Top;
 
+	public GameObject Shrimp;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -37,6 +39,8 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 			if (hit.collider) {
 				Events.instance.Raise (new ClickResourceEvent (this));
 				Debug.Log ("yes oil!");
+				Behavior();
+				Shrimp.SetActive(true);
 			}
 		}
 		

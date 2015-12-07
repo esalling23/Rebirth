@@ -4,7 +4,7 @@ using System.Collections;
 
 public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
-	public static GrassBehavior access;
+	public static GrassBehavior grassAccess;
 
 	public GameObject grassInfo;
 	//public Renderer renderer;
