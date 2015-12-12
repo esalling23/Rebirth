@@ -7,10 +7,12 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 	public Color color;
 	public Color clean;
 	public Color highlight;
-	//public GameObject oilInfo;
+	public GameObject hover;
 
 	void Start () {
-		
+		iTween.ColorTo(gameObject, iTween.Hash(
+			"color", color
+			));
 	}
 
 	public void Behavior () {
@@ -26,6 +28,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     public void OnMouseEnter()
     {
         Debug.Log("Highlight Oil!");
+		hover.SetActive(true);
 		Events.instance.Raise (new HoverResourceEvent (this));
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", highlight,
@@ -37,6 +40,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     public void OnMouseExit()
     {
         Debug.Log("Unhighlight Oil!");
+		hover.SetActive(false);
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", color,
             "time", .01f

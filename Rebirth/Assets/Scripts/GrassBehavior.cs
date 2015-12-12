@@ -6,7 +6,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
 	public static GrassBehavior grassAccess;
 
-	public GameObject grassInfo;
+	public GameObject hover;
 	//public Renderer renderer;
 	public Color color;
 	public Color green;
@@ -31,13 +31,11 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 			"color", green, 
 			"time", 200f
 			));
-
-		grassInfo.SetActive (false);
-
 	}
 	
     public void OnMouseEnter()
 	{
+		hover.SetActive (true);
 		//Debug.Log ("Highlight Grass!");
 		Events.instance.Raise (new HoverResourceEvent (this));
 		iTween.ColorTo (gameObject, iTween.Hash (
@@ -49,6 +47,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
 	public void OnMouseExit()
 	{
+		hover.SetActive (false);
 		//Debug.Log ("Unhighlight Grass!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", color,

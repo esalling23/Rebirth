@@ -7,13 +7,18 @@ public class ResourceScreen : MonoBehaviour {
 
 	public Text playerStats;
 	public GameObject Player;
+	public GameObject deadScreen;
 
 	public int health = 20;
 	public int currenthealth;
 	public int currentfuel;
 	public int minfuel = 0;
 	public int trashRemaining;
+	public int bigTrashRemaining;
 	public int oilRemaining;
+	public int grassRemaining;
+	public int palmRemaining;
+
 
 	private bool inWater = false;
 	private bool dead = false;
@@ -31,15 +36,17 @@ public class ResourceScreen : MonoBehaviour {
 			(OnClickResourceEvent);
 	}
 
+
+
 	void OnTriggerEnter(Collider other) {
-		if (other.tag == "Ocean") {
+		if (other.tag == "Low Ocean Floor") {
 			inWater = true;
 			Health (1);
 		}
 	}
 	
 	void OnTriggerExit(Collider other) {
-		if (other.tag == "Ocean") {
+		if (other.tag == "Low Ocean Floor") {
 			inWater = false;
 		}
 	}
@@ -47,9 +54,10 @@ public class ResourceScreen : MonoBehaviour {
 	void Health(int loss) {
 		currenthealth -= loss;
 
-		if (currenthealth == 0) {
+		if (currenthealth == 0 && dead == false) {
 			Debug.Log("dead");
 			dead = true;
+			deadScreen.SetActive (true);
 		}
 	}
 
@@ -57,7 +65,7 @@ public class ResourceScreen : MonoBehaviour {
 	void OnClickResourceEvent(ClickResourceEvent e) {
 		if (e.resource is GrassBehavior) {
 			if (currentfuel > 0) {
-				grassAccess.Behavior();
+				grassRemaining -= 1;
 				currentfuel -= 1;
 			} else {
 				//play reject sound
@@ -66,7 +74,7 @@ public class ResourceScreen : MonoBehaviour {
 		}
 		if (e.resource is OilBehavior) {
 			if (currentfuel < 10) {
-				OilBehavior.Behavior();
+				oilRemaining -= 1;
 				currentfuel += 2;
 			} else {
 				//play reject sound
@@ -79,8 +87,18 @@ public class ResourceScreen : MonoBehaviour {
 		if (e.resource is TrashBehavior)
 		{
 			if (currentfuel < 10) {
-				TrashBehavior.Behavior();
+				trashRemaining -= 1;
 				currentfuel += 2;
+			} else {
+				//play reject sound
+				//reject message
+			}
+		}
+		if (e.resource is BigTrashBehavior)
+		{
+			if (currentfuel < 10) {
+				bigTrashRemaining -= 1;
+				currentfuel += 4;
 			} else {
 				//play reject sound
 				//reject message
@@ -88,7 +106,13 @@ public class ResourceScreen : MonoBehaviour {
 		}
 		if (e.resource is PalmBehavior)
 		{
-
+			if (currentfuel < 10) {
+				palmRemaining -= 1;
+				currentfuel -= 4;
+			} else {
+				//play reject sound
+				//reject message
+			}
 		}
 		
 	}     

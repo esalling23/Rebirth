@@ -51,7 +51,7 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 	{
 		Debug.Log("Mangrove Growing!");
 		iTween.MoveBy(Top,iTween.Hash(
-			"y"   , 2.2,
+			"y"   , 2.0,
 			"time", 200f
 			));
 		iTween.MoveBy(Roots,iTween.Hash(
