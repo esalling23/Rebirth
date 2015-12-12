@@ -12,9 +12,12 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
 
 	// Use this for initialization
 	void Start () {
+<<<<<<< 2bb029d324ec415ffa1a49920536590f2638d5d6
 <<<<<<< 9d5786b42efb0ce03266ad10240f38a4b8965978
 		palming = false;
 <<<<<<< Updated upstream
+=======
+>>>>>>> 3e59c2638d0ffcbd20c0d1fbf6274a8e815eae87
 =======
 >>>>>>> 3e59c2638d0ffcbd20c0d1fbf6274a8e815eae87
 		anim = GetComponent<Animator>();
@@ -47,12 +50,15 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
 <<<<<<< Updated upstream
        //this.GetComponent<Animator>().Play("PalmGrow");
 		anim.SetTrigger ("Palming");
+<<<<<<< 2bb029d324ec415ffa1a49920536590f2638d5d6
 <<<<<<< 9d5786b42efb0ce03266ad10240f38a4b8965978
         palmInfo.SetActive(false);
 =======
         //this.GetComponent<Animator>().Play("PalmGrow");
        palmInfo.SetActive(false);
 >>>>>>> Stashed changes
+=======
+>>>>>>> 3e59c2638d0ffcbd20c0d1fbf6274a8e815eae87
 =======
 >>>>>>> 3e59c2638d0ffcbd20c0d1fbf6274a8e815eae87
     }
@@ -91,9 +97,12 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
             {
                 Events.instance.Raise(new ClickResourceEvent(this));
                 Debug.Log("yes palm!");
+<<<<<<< 2bb029d324ec415ffa1a49920536590f2638d5d6
 <<<<<<< 9d5786b42efb0ce03266ad10240f38a4b8965978
 				palming = true;
 <<<<<<< Updated upstream
+=======
+>>>>>>> 3e59c2638d0ffcbd20c0d1fbf6274a8e815eae87
 =======
 >>>>>>> 3e59c2638d0ffcbd20c0d1fbf6274a8e815eae87
 				anim.SetTrigger ("Palming");
