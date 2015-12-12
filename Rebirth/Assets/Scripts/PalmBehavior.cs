@@ -9,30 +9,47 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
     public Color color;
 	private bool palming;
 
-	private Animator anim;
+	// private Animator anim;
 
 	// Use this for initialization
 	void Start () {
 		palming = false;
+<<<<<<< Updated upstream
 		anim = GetComponent<Animator>();
+=======
+		// anim = GetComponent<Animator>();
+        //GetComponent<Animation>().Play("Idle");
+>>>>>>> Stashed changes
     }
 	
 	// Update is called once per frame
 	void Update () {
 		// Cache the attention attracting input.
+<<<<<<< Updated upstream
 		//bool OnClick = Input.GetButtonDown("Grow");
 		
 		// Set the animator shouting parameter.
 		//anim.SetBool(hash.shoutingBool, shout);
+=======
+		// bool OnClick = Input.GetButtonDown("Grow");
+		
+		// Set the animator shouting parameter.
+		// anim.SetBool(hash.shoutingBool, shout);
+>>>>>>> Stashed changes
 	}
 
     public void Behavior()
     {
         Debug.Log("Palm Growing!");
         //play animation
+<<<<<<< Updated upstream
        //this.GetComponent<Animator>().Play("PalmGrow");
 		anim.SetTrigger ("Palming");
         palmInfo.SetActive(false);
+=======
+        //this.GetComponent<Animator>().Play("PalmGrow");
+       palmInfo.SetActive(false);
+>>>>>>> Stashed changes
     }
 
 
@@ -68,7 +85,12 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
                 //Events.instance.Raise(new ClickResourceEvent(this));
                 Debug.Log("yes palm!");
 				palming = true;
+<<<<<<< Updated upstream
 				anim.SetTrigger ("Palming");
+=======
+				
+
+>>>>>>> Stashed changes
             }
         }
 

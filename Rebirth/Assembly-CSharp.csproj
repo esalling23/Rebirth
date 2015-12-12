@@ -84,7 +84,11 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
+<<<<<<< Updated upstream
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+=======
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+>>>>>>> Stashed changes
  </Reference>
  <Reference Include="DOTween">
  <HintPath>/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
