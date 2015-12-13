@@ -26,6 +26,7 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     public void OnMouseEnter()
     {
         //Debug.Log("Highlight Trash!");
+		trashInfo.SetActive (true);
 		Events.instance.Raise (new HoverResourceEvent (this));
 		iTween.ColorTo(gameObject, iTween.Hash(
             "color", highlight,
@@ -35,7 +36,8 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
     }
 
     public void OnMouseExit()
-    {
+	{		
+		trashInfo.SetActive (false);
         //Debug.Log("Unhighlight Trash!");
         iTween.ColorTo(gameObject, iTween.Hash(
             "color", color,

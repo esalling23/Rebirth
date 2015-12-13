@@ -5,9 +5,12 @@ using System.Collections;
 
 public class ResourceStats: MonoBehaviour {
 
+	public GameObject accessGameMaster;
+
 	public GameObject hover;
 	public Text resourceStat;
 	public Text resourceName;
+	public Text resourceType;
 
 
 
@@ -22,7 +25,7 @@ public class ResourceStats: MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		hover.SetActive(false);
+		//hover.SetActive(false);
 		Events.instance.AddListener<HoverResourceEvent>
 			(OnHoverResourceEvent);
 	}
@@ -30,45 +33,55 @@ public class ResourceStats: MonoBehaviour {
 	void OnHoverResourceEvent(HoverResourceEvent e) {
 		if (e.hoverResource is GrassBehavior) {
 			Debug.Log ("hovering");
-			resourceName.text = "Grass: ";
-			resourceStat.text = "Plant Species\nRehab costs: 1 FUEL";
+			resourceName.text = "GRASS: ";
+			resourceType.text = "PLANT SPECIES";
+			resourceStat.text = "Rehab costs: - 1 FUEL";
 
 
 		}
 		if (e.hoverResource is OilBehavior) {
 			Debug.Log ("hovering");
-			resourceName.text = "Oil: ";
-			resourceStat.text = "Pollution\nClean up rewards: 2 FUEL";
+			resourceName.text = "OIL: ";
+			resourceType.text = "POLLUTION";
+			resourceStat.text = "CLEAN_UP_REWARDS: + 2 FUEL";
 
 		}
 		if (e.hoverResource is MangroveBehavior) {
 			Debug.Log ("hovering");
-			resourceName.text = "Mangrove: ";
-			resourceStat.text = "Plant Species\nRehab costs: 3 FUEL";
-
-
+			if (accessGameMaster.GetComponent<GameMaster>().mangroveRemaining == 0) {
+				resourceName.text = "SHRIMP_HABITAT:";
+				resourceType.text = "ANIMAL_SPECIES";
+				resourceStat.text = "REHAB_COSTS = - 6 FUEL";
+			} else {
+				resourceName.text = "MANGROVE: ";
+				resourceType.text = "PLANT SPECIES";
+				resourceStat.text = "REHAB COSTS: - 4 FUEL";
+			}
 		}
         if (e.hoverResource is TrashBehavior)
         {
 			Debug.Log ("hovering");
-			resourceName.text = "Trash: ";
-			resourceStat.text = "Pollution\nClean up rewards: 2 FUEL";
+			resourceName.text = "TRASH: ";
+			resourceType.text = "POLLUTION";
+			resourceStat.text = "CLEAN UP REWARDS: + 4 FUEL";
 
 
 		}
 		if (e.hoverResource is BigTrashBehavior)
 		{
 			Debug.Log ("hovering");
-			resourceName.text = "Trash: ";
-			resourceStat.text = "Pollution\nClean up rewards: 4 FUEL";
+			resourceName.text = "TRASH: ";
+			resourceType.text = "POLLUTION";
+			resourceStat.text = "CLEAN UP REWARDS: - 6 FUEL";
 			
 			
 		}
         if (e.hoverResource is PalmBehavior)
         {
 			Debug.Log ("hovering");
-			resourceName.text = "Palm: ";
-			resourceStat.text = "Plant Species\nRehab costs: 4 FUEL";
+			resourceName.text = "PALM: ";
+			resourceType.text = "PLANT SPECIES";
+			resourceStat.text = "REHAB COSTS: + 4 FUEL";
 		}
        
     }

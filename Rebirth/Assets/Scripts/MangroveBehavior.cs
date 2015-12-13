@@ -3,17 +3,24 @@ using UnityEngine.EventSystems;
 using System.Collections;
 
 public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
-	
+
+	private GameMaster accessGameMaster;
+
 	public Color color;
+	public Color highlight;
 	public float speed;
+
+	public GameObject hover;
+
 	public GameObject Roots;
 	public GameObject Top;
-
 	public GameObject Shrimp;
 
 	// Use this for initialization
 	void Start () {
-	
+		iTween.ColorTo (gameObject, iTween.Hash (
+			"color", color
+			));
 	}
 	
 	// Update is called once per frame
@@ -22,12 +29,24 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 	}
 	public void OnPointerEnter(PointerEventData e)
 	{
-		//Events.instance.Raise (new ClickResourceEvent (this));
+		iTween.ColorTo (gameObject, iTween.Hash (
+			"color", highlight, 
+			"time", .1f
+			
+			));
+		hover.SetActive (true);
+		Events.instance.Raise (new HoverResourceEvent (this));
 	}
 
 	public void OnPointerExit(PointerEventData e)
 	{
-		//Events.instance.Raise (new ClickResourceEvent (this));
+		iTween.ColorTo (gameObject, iTween.Hash (
+			"color", color, 
+			"time", .1f
+			
+			));
+		hover.SetActive (false);
+		//Events.instance.Raise (new HoverResourceEvent (this));
 	}
 
 	public void OnPointerDown(PointerEventData e)
@@ -38,9 +57,12 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 			Debug.DrawLine (ray.origin, hit.point);
 			if (hit.collider) {
 				Events.instance.Raise (new ClickResourceEvent (this));
-				Debug.Log ("yes oil!");
-				Behavior();
-				Shrimp.SetActive(true);
+				Debug.Log ("yes mangrow!");
+				if (accessGameMaster.mangroveRemaining == 0) {
+					Shrimp.SetActive(true);
+				} else {
+					Behavior();
+				}
 			}
 		}
 		
