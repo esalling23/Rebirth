@@ -5,7 +5,7 @@ using System.Collections;
 
 public class ResourceStats: MonoBehaviour {
 
-	public GameObject accessGameMaster;
+	public GameObject accessGM;
 
 	public GameObject hover;
 	public Text resourceStat;
@@ -35,7 +35,7 @@ public class ResourceStats: MonoBehaviour {
 			Debug.Log ("hovering");
 			resourceName.text = "GRASS: ";
 			resourceType.text = "PLANT SPECIES";
-			resourceStat.text = "Rehab costs: - 1 FUEL";
+			resourceStat.text = "Rehab costs: - 2 FUEL";
 
 
 		}
@@ -43,19 +43,19 @@ public class ResourceStats: MonoBehaviour {
 			Debug.Log ("hovering");
 			resourceName.text = "OIL: ";
 			resourceType.text = "POLLUTION";
-			resourceStat.text = "CLEAN_UP_REWARDS: + 2 FUEL";
+			resourceStat.text = "CLEAN_UP_REWARDS: + 1 FUEL";
 
 		}
 		if (e.hoverResource is MangroveBehavior) {
 			Debug.Log ("hovering");
-			if (accessGameMaster.GetComponent<GameMaster>().mangroveRemaining == 0) {
+			if (accessGM.GetComponent<GameMaster>().mangroveRemaining == 0) {
 				resourceName.text = "SHRIMP_HABITAT:";
 				resourceType.text = "ANIMAL_SPECIES";
-				resourceStat.text = "REHAB_COSTS = - 6 FUEL";
+				resourceStat.text = "REHAB_COSTS = - 8 FUEL";
 			} else {
 				resourceName.text = "MANGROVE: ";
 				resourceType.text = "PLANT SPECIES";
-				resourceStat.text = "REHAB COSTS: - 4 FUEL";
+				resourceStat.text = "REHAB COSTS: - 6 FUEL";
 			}
 		}
         if (e.hoverResource is TrashBehavior)
@@ -63,7 +63,7 @@ public class ResourceStats: MonoBehaviour {
 			Debug.Log ("hovering");
 			resourceName.text = "TRASH: ";
 			resourceType.text = "POLLUTION";
-			resourceStat.text = "CLEAN UP REWARDS: + 4 FUEL";
+			resourceStat.text = "CLEAN UP REWARDS: + 2 FUEL";
 
 
 		}
@@ -72,7 +72,7 @@ public class ResourceStats: MonoBehaviour {
 			Debug.Log ("hovering");
 			resourceName.text = "TRASH: ";
 			resourceType.text = "POLLUTION";
-			resourceStat.text = "CLEAN UP REWARDS: - 6 FUEL";
+			resourceStat.text = "CLEAN UP REWARDS: + 4 FUEL";
 			
 			
 		}

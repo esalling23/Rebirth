@@ -4,6 +4,8 @@ using System.Collections;
 
 public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
+	public GameObject accessGM;
+
     public GameObject trashInfo;
     public Color color;
     public Color highlight;
@@ -54,9 +56,11 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider)
             {
-                Events.instance.Raise(new ClickResourceEvent(this));
-                Debug.Log("yes trash!");
-				gameObject.SetActive(false);
+				if (accessGM.GetComponent<GameMaster>().currentfuel <= 10) { 
+	                Events.instance.Raise(new ClickResourceEvent(this));
+	                Debug.Log("yes trash!");
+					gameObject.SetActive(false);
+				}
             }
         }
     }

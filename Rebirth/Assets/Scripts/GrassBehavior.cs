@@ -5,6 +5,9 @@ using System.Collections;
 public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
 	public static GrassBehavior grassAccess;
+	public GameObject accessGM;
+
+	private BoxCollider collider;
 
 	public GameObject hover;
 	//public Renderer renderer;
@@ -20,6 +23,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", color
 			));
+		collider = this.GetComponent<BoxCollider>();
 
 	}
 
@@ -29,30 +33,49 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 		Debug.Log ("Grass Growing!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", green, 
-			"time", 200f
+			"time", 6f
 			));
+		iTween.MoveBy(gameObject,iTween.Hash(
+			"y"   , .35,
+			"time", 5f
+			));
+		collider.enabled = false;
 	}
 	
     public void OnMouseEnter()
 	{
-		hover.SetActive (true);
-		//Debug.Log ("Highlight Grass!");
-		Events.instance.Raise (new HoverResourceEvent (this));
-		iTween.ColorTo (gameObject, iTween.Hash (
-			"color", highlight, 
-			"time", .1f
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, 2f)) {
+			Debug.DrawLine (ray.origin, hit.point);
+			if (hit.collider) {
+				hover.SetActive (true);
+				//Debug.Log ("Highlight Grass!");
+				Events.instance.Raise (new HoverResourceEvent (this));
+				iTween.ColorTo (gameObject, iTween.Hash (
+					"color", highlight, 
+					"time", .01f
 
-			));
+				));
+			}
+		}
 	}
 
 	public void OnMouseExit()
 	{
-		hover.SetActive (false);
-		//Debug.Log ("Unhighlight Grass!");
-		iTween.ColorTo (gameObject, iTween.Hash (
-			"color", color,
-			"time", .1f
-			));
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, 2f)) {
+			Debug.DrawLine (ray.origin, hit.point);
+			if (hit.collider) {
+				hover.SetActive (false);
+				//Debug.Log ("Unhighlight Grass!");
+				iTween.ColorTo (gameObject, iTween.Hash (
+					"color", color,
+					"time", .01f
+				));
+			}
+		}
 	}
 
 	public void OnPointerDown(PointerEventData e)
@@ -62,8 +85,11 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 		if (Physics.Raycast (ray, out hit, 2f)) {
 			Debug.DrawLine (ray.origin, hit.point);
 			if (hit.collider) {
-				Events.instance.Raise (new ClickResourceEvent (this));
-				Debug.Log ("yes grass!");
+				if (accessGM.GetComponent<GameMaster>().currentfuel >= 2) { 
+					Events.instance.Raise (new ClickResourceEvent (this));
+					Debug.Log ("yes grass!");
+					Behavior();
+				}
 			}
 		}
 	}

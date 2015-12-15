@@ -5,7 +5,7 @@ using System.Collections;
 
 public class GameMaster : MonoBehaviour {
 	
-	public static GameMaster accessGameMaster; 
+	public static GameMaster accessGM; 
 
 	public Slider healthslider;
 	public Slider fuelslider;
@@ -17,20 +17,34 @@ public class GameMaster : MonoBehaviour {
 	public GameObject deadScreen;
 	
 	private int maxhealth = 25;
-	private int currenthealth;
+	public int currenthealth;
 
-	private int currentfuel;
+	public int currentfuel;
 	private int maxfuel = 10;
 
 	public GameObject grass;
+	private bool grassAppear = false;
+	public GameObject grassTwo;
+	private bool grassTwoAppear = false;
+	public GameObject grassThree;
+	private bool grassThreeAppear = false;
 	public GameObject palms;
+	private bool palmsAppear = false;
 
-	public int trashRemaining = 12;
-	public int bigTrashRemaining = 9;
-	public int oilRemaining = 35;
-	public int grassRemaining = 16;
-	public int mangroveRemaining = 8;
-	public int palmRemaining = 4;
+	public int trashStart = 12;
+	public int trashRemaining;
+	public int bigTrashStart = 9;
+	public int bigTrashRemaining;
+	public int oilStart = 35;
+	public int oilRemaining;
+	public int grassRemaining;
+	public int grassStart = 16;
+	public int mangroveStart = 8;
+	public int mangroveRemaining;
+	public int palmStart = 4;
+	public int palmRemaining;
+	
+	private int rate = 10;
 
 	private int shrimpRemaining = 8;
 	
@@ -46,23 +60,37 @@ public class GameMaster : MonoBehaviour {
 	//float Timer;
 
 	void Update () {
-		if (currenthealth < 0) {
+		if (currenthealth <= 0) {
 			currenthealth = 0;
 		}
-		if (inWater == true && inDeepWater == true) {
-			StartCoroutine (healthLoss);
-			//Health (-1);
+		if (inWater == true) {
+			if (currenthealth == 0 && dead == false) {
+				Debug.Log ("gonna die");
+				Dead ();
+			} else {
+				Debug.Log("starting");
+				StartCoroutine (healthLoss);
+			}
 		} else {
 			StopCoroutine (healthLoss);
 		}
-		if (inDeepWater == true && inWater == false) {
-			StartCoroutine(healthLoss);
+		if (inDeepWater == true) {
+			if (currenthealth == 0 && dead == false) {
+				Debug.Log ("gonna die");
+				//dead = true;
+				Dead ();
+			} else {
+				Debug.Log("starting again");
+				StartCoroutine(healthLoss);
+			}
 
 		} else {
 			StopCoroutine (healthLoss);
 
 		}
 		if (heal == true) {
+			Debug.Log("starting heal");
+
 			StartCoroutine (healthGain);
 			//Health 
 		}  else {
@@ -82,11 +110,15 @@ public class GameMaster : MonoBehaviour {
 		fuelslider.value = currentfuel;
 		fuelcount.text = currentfuel.ToString();
 
-		healthLoss = HealthLoss(400 * Time.deltaTime);
-		healthGain = HealthGain (200 * Time.deltaTime);
+		healthLoss = HealthLoss(3);
+		healthGain = HealthGain (6);
 
 		Events.instance.AddListener<ClickResourceEvent>
 			(OnClickResourceEvent);
+
+		//grassanim = grass.GetComponent<Animator>();
+		//palmsanim = palms.GetComponent<Animator>();
+
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -117,27 +149,23 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	IEnumerator HealthLoss (float waitTime) {
-		if (currenthealth == 0 && dead == false) {
-			Debug.Log ("gonna die");
-			Dead ();
-		} else {
-			for (currenthealth = maxhealth; currenthealth >= 0; currenthealth--) {
+			for (currenthealth = maxhealth; currenthealth >= 0; currenthealth -= 2 / rate) {
+				yield return new WaitForSeconds(waitTime);
 				healthslider.value = currenthealth;
 				healthcount.text = currenthealth.ToString();
 				Debug.Log (currenthealth);
 				//yield return null;
-				yield return new WaitForSeconds(waitTime);
-			}
+
 		}
 	}
 
 	IEnumerator HealthGain (float waitTime) {
-		for (currenthealth = maxhealth; currenthealth >= 0; currenthealth++) {
+		for (currenthealth = maxhealth; currenthealth >= 0; currenthealth += 1 / rate) {
+			yield return new WaitForSeconds(waitTime);
 			healthslider.value = currenthealth;
 			healthcount.text = currenthealth.ToString();
 			Debug.Log (currenthealth);
 			//yield return null;
-			yield return new WaitForSeconds(waitTime);
 		}
 	}
 
@@ -161,10 +189,34 @@ public class GameMaster : MonoBehaviour {
 		if (e.resource is GrassBehavior) {
 			if (currentfuel > 0) {
 				grassRemaining -= 1;
-				Fuel (-1);
+				Fuel (-2);
 				Debug.Log (currentfuel + " fuel and " + grassRemaining + " grass remaining");
-				if (grassRemaining == 0) {
-					palms.transform.Translate(Vector3.up * Time.deltaTime); 
+				if (grassRemaining == grassStart/3 && palmsAppear == false) {
+					Debug.Log ("palms appearing");
+					iTween.MoveBy(palms,iTween.Hash(
+						"y"   , .2,
+						"time", 2f
+						));
+					palmsAppear = true;
+					Debug.Log (palmsAppear);
+				}
+				if (grassRemaining == grassStart/2 && grassTwoAppear == false) {
+					Debug.Log ("grass2 appearing");
+					iTween.MoveBy(grassTwo,iTween.Hash(
+						"y"   , .2,
+						"time", 2f
+						));
+					grassTwoAppear = true;
+					Debug.Log (grassTwoAppear);
+				}
+				if (grassRemaining == 0 && grassThreeAppear == false) {
+					Debug.Log ("grass3 appearing");
+					iTween.MoveBy(grassThree,iTween.Hash(
+						"y"   , .2,
+						"time", 2f
+						));
+					grassThreeAppear = true;
+					Debug.Log (grassThreeAppear);
 				}
 			} else {
 				Debug.Log ("NO!");
@@ -177,8 +229,15 @@ public class GameMaster : MonoBehaviour {
 				oilRemaining -= 1;
 				Fuel (2);
 				Debug.Log (currentfuel + " fuel and " + oilRemaining + " oil remaining");
-				if (oilRemaining == 0 && trashRemaining == 0) {
-					grass.transform.Translate(Vector3.up * Time.deltaTime); 
+				if (currentfuel == 8 && grassAppear == false) {
+					Debug.Log ("grass appearing");
+					iTween.MoveBy(grass,iTween.Hash(
+						"y"   , .1,
+						"time", 1f
+						));
+					grassAppear = true;
+					Debug.Log (grassAppear);
+
 				}
 			} else {
 				Debug.Log ("NO!");
@@ -189,13 +248,13 @@ public class GameMaster : MonoBehaviour {
 		}
 		if (e.resource is MangroveBehavior) {
 			if (currentfuel > 0) {
-				if (mangroveRemaining == 0) {
+				if (mangroveRemaining == 9) {
 					shrimpRemaining -= 1;
-					Fuel (-6);
+					Fuel (-10);
 					Debug.Log (currentfuel + " fuel and " + shrimpRemaining + " shrimp remaining");
 				} else {
 					mangroveRemaining -= 1;
-					Fuel (-4);
+					Fuel (-8);
 					Debug.Log (currentfuel + " fuel and " + mangroveRemaining + " mangrove remaining");
 				}
 			} else {
@@ -212,8 +271,14 @@ public class GameMaster : MonoBehaviour {
 				trashRemaining -= 1;
 				Fuel (4);
 				Debug.Log (currentfuel + " fuel and " + trashRemaining + " trash remaining");
-				if (oilRemaining == 0 && trashRemaining == 0) {
-					grass.transform.Translate(Vector3.up * Time.deltaTime); 
+				if (currentfuel == 9 && grassAppear == false) {
+					Debug.Log ("grass appearing");
+					iTween.MoveBy(grass,iTween.Hash(
+						"y"   , .15,
+						"time", 1f
+						));
+					grassAppear = true;
+					Debug.Log (grassAppear);
 				}
 			} else {
 				Debug.Log ("NO!");
