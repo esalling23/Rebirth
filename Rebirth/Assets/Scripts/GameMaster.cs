@@ -30,6 +30,10 @@ public class GameMaster : MonoBehaviour {
 	private bool grassThreeAppear = false;
 	public GameObject palms;
 	private bool palmsAppear = false;
+	public GameObject palmsTwo;
+	private bool palmsTwoAppear = false;
+	public GameObject palmsThree;
+	private bool palmsThreeAppear = false;
 
 	public int trashStart = 12;
 	public int trashRemaining;
@@ -110,8 +114,8 @@ public class GameMaster : MonoBehaviour {
 		fuelslider.value = currentfuel;
 		fuelcount.text = currentfuel.ToString();
 
-		healthLoss = HealthLoss(3);
-		healthGain = HealthGain (6);
+		healthLoss = HealthLoss(1);
+		healthGain = HealthGain (1);
 
 		Events.instance.AddListener<ClickResourceEvent>
 			(OnClickResourceEvent);
@@ -191,7 +195,7 @@ public class GameMaster : MonoBehaviour {
 				grassRemaining -= 1;
 				Fuel (-2);
 				Debug.Log (currentfuel + " fuel and " + grassRemaining + " grass remaining");
-				if (grassRemaining == grassStart/3 && palmsAppear == false) {
+				if (grassRemaining == grassStart/4 && palmsAppear == false) {
 					Debug.Log ("palms appearing");
 					iTween.MoveBy(palms,iTween.Hash(
 						"y"   , .2,
@@ -203,18 +207,20 @@ public class GameMaster : MonoBehaviour {
 				if (grassRemaining == grassStart/2 && grassTwoAppear == false) {
 					Debug.Log ("grass2 appearing");
 					iTween.MoveBy(grassTwo,iTween.Hash(
-						"y"   , .2,
+						"y"   , .1,
 						"time", 2f
 						));
+					grassRemaining = grassRemaining + grassStart;
 					grassTwoAppear = true;
 					Debug.Log (grassTwoAppear);
 				}
 				if (grassRemaining == 0 && grassThreeAppear == false) {
 					Debug.Log ("grass3 appearing");
 					iTween.MoveBy(grassThree,iTween.Hash(
-						"y"   , .2,
+						"y"   , .1,
 						"time", 2f
 						));
+					grassRemaining = grassRemaining + grassStart;
 					grassThreeAppear = true;
 					Debug.Log (grassThreeAppear);
 				}
@@ -274,7 +280,7 @@ public class GameMaster : MonoBehaviour {
 				if (currentfuel == 9 && grassAppear == false) {
 					Debug.Log ("grass appearing");
 					iTween.MoveBy(grass,iTween.Hash(
-						"y"   , .15,
+						"y"   , .1,
 						"time", 1f
 						));
 					grassAppear = true;
