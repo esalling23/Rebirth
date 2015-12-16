@@ -28,11 +28,11 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 			//play animation
 			iTween.ColorTo (gameObject, iTween.Hash (
 				"color", clean, 
-				"time", 1f
+				"time", 0.5f
 			));
 			iTween.MoveBy(gameObject,iTween.Hash(
 				"y"   , -.2,
-				"time", 2f
+				"time", 1f
 				));
 		}
 	}

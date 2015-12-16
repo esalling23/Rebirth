@@ -33,11 +33,11 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 		Debug.Log ("Grass Growing!");
 		iTween.ColorTo (gameObject, iTween.Hash (
 			"color", green, 
-			"time", 6f
+			"time", 2f
 			));
 		iTween.MoveBy(gameObject,iTween.Hash(
 			"y"   , .35,
-			"time", 5f
+			"time", 2f
 			));
 		collider.enabled = false;
 	}

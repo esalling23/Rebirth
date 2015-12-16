@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\CharacterMotorC.cs" />
      <Compile Include="Assets\Scripts\ClickResourceEvent.cs" />
      <Compile Include="Assets\Scripts\CoralBehavior.cs" />
+     <Compile Include="Assets\Scripts\CoralColor.cs" />
      <Compile Include="Assets\Scripts\DevelopmentTemps\GrassAnimate.cs" />
      <Compile Include="Assets\Scripts\DevelopmentTemps\MangroveAnimate.cs" />
      <Compile Include="Assets\Scripts\DevelopmentTemps\OilAnimate.cs" />
@@ -72,6 +73,7 @@
      <Compile Include="Assets\Scripts\OnClickCubeUI.cs" />
      <Compile Include="Assets\Scripts\PalmBehavior.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Quit.cs" />
      <Compile Include="Assets\Scripts\ResourceStats.cs" />
      <Compile Include="Assets\Scripts\TextureEditor\Noise.cs" />
      <Compile Include="Assets\Scripts\TextureEditor\TextureCreator.cs" />
