@@ -257,7 +257,7 @@ public class GameMaster : MonoBehaviour {
 				oilRemaining -= 1;
 				Fuel (2);
 				Debug.Log (currentfuel + " fuel and " + oilRemaining + " oil remaining");
-				if (currentfuel == 8.0f && grassAppear == false) {
+				if (currentfuel >= 8 && grassAppear == false) {
 					Debug.Log ("grass appearing");
 					iTween.MoveBy(grass,iTween.Hash(
 						"y"   , .15,
@@ -294,7 +294,7 @@ public class GameMaster : MonoBehaviour {
 				trashRemaining -= 1;
 				Fuel (4);
 				Debug.Log (currentfuel + " fuel and " + trashRemaining + " trash remaining");
-				if (currentfuel == 9 && grassAppear == false) {
+				if (currentfuel >= 8 && grassAppear == false) {
 					Debug.Log ("grass appearing");
 					iTween.MoveBy(grass,iTween.Hash(
 						"y"   , .1,
