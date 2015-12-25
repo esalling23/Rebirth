@@ -16,11 +16,11 @@ public class GameMaster : MonoBehaviour {
 	public GameObject Player;
 	public GameObject deadScreen;
 	
-	private float maxhealth = 100.0f;
-	public float currenthealth;
+	private int maxhealth = 100;
+	public int currenthealth;
 
-	public float currentfuel;
-	private float maxfuel = 10.0f;
+	public int currentfuel;
+	private int maxfuel = 10;
 
 	public GameObject grass;
 	private bool grassAppear = false;

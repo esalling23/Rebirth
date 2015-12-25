@@ -2,7 +2,10 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
+public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler {
+
+	public GameObject accessGM;
+
 
     public GameObject hover;
     public Color highlight;
@@ -10,9 +13,12 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
 
 	private Animator anim;
 
+	private BoxCollider collider;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
+		collider = this.GetComponent<BoxCollider>();
     }
 	
 	// Update is called once per frame
@@ -24,28 +30,43 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
         Debug.Log("Palm Growing!");
         //play animation
 		anim.SetTrigger ("Palming");
+		collider.enabled = false;
     }
 
 
     public void OnMouseEnter()
     {
-        //Debug.Log("Highlight Palm!");
-		hover.SetActive (true);
-		Events.instance.Raise (new HoverResourceEvent (this));
-		iTween.ColorTo(gameObject, iTween.Hash(
-            "color", highlight,
-            "time", .1f
-            ));
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, 2f)) {
+			Debug.DrawLine (ray.origin, hit.point);
+			if (hit.collider) {
+				//Debug.Log("Highlight Palm!");
+				hover.SetActive (true);
+				Events.instance.Raise (new HoverResourceEvent (this));
+				iTween.ColorTo (gameObject, iTween.Hash (
+		            "color", highlight,
+		            "time", .1f
+				));
+			}
+		}
     }
 
     public void OnMouseExit()
     {
-		hover.SetActive (false);
-       // Debug.Log("Unhighlight Palm!");
-        iTween.ColorTo(gameObject, iTween.Hash(
-            "color", color,
-            "time", .1f
-            ));
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit, 2f)) {
+			Debug.DrawLine (ray.origin, hit.point);
+			if (hit.collider) {
+				hover.SetActive (false);
+				// Debug.Log("Unhighlight Palm!");
+				iTween.ColorTo (gameObject, iTween.Hash (
+		            "color", color,
+		            "time", .1f
+				));
+			}
+		}
     }
 
     public void OnPointerDown(PointerEventData e)
@@ -57,8 +78,10 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler{
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider)
             {
-                Events.instance.Raise(new ClickResourceEvent(this));
-				Behavior();
+				if (accessGM.GetComponent<GameMaster>().currentfuel >= 2) { 
+	                Events.instance.Raise(new ClickResourceEvent(this));
+					Behavior();
+				}
             }
         }
 

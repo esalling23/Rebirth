@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler {
+public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
 	public GameObject accessGM;
 
@@ -35,7 +35,7 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 	void Update () {
 	
 	}
-	public void OnPointerEnter(PointerEventData e)
+	public void OnMouseEnter()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
@@ -55,7 +55,7 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler, I
 		}
 	}
 
-	public void OnPointerExit(PointerEventData e)
+	public void OnMouseExit()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;

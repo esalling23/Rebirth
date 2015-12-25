@@ -1,20 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameMaster.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MangroveBehavior.cs">
     <Files>
-      <File FileName="Assets/Scripts/Quit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GameMaster.cs" Line="260" Column="22" />
-      <File FileName="Assets/Scripts/LoadGame.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ResourceStats.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/ClickResourceEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GrassBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/FPSControllerEnhanced.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/MangroveBehavior.cs" Line="94" Column="7" />
-      <File FileName="Assets/Scripts/HoverResourceEvent.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/TrashBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PalmBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PalmBehavior.cs" Line="5" Column="75" />
       <File FileName="Assets/Scripts/OilBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/OnClickCubeUI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ResourceStats.cs" Line="66" Column="43" />
+      <File FileName="Assets/Scripts/GameMaster.cs" Line="17" Column="26" />
+      <File FileName="Assets/Scripts/MangroveBehavior.cs" Line="5" Column="78" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
