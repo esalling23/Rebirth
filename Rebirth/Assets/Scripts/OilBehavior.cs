@@ -5,6 +5,7 @@ using System.Collections;
 public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
 	public GameObject accessGM;
+	public GameObject accessFuel;
 
 	public Color color;
 	public Color clean;
@@ -85,7 +86,7 @@ public class OilBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 			if (Physics.Raycast (ray, out hit, 2f)) {
 				Debug.DrawLine (ray.origin, hit.point);
 				if (hit.collider) {
-					if (accessGM.GetComponent<GameMaster> ().currentfuel <= 9) { 
+					if (accessFuel.GetComponent<Fuel>().currentfuel <= 9) { 
 						Events.instance.Raise (new ClickResourceEvent (this));
 						Debug.Log ("yes oil!");
 						Behavior ();

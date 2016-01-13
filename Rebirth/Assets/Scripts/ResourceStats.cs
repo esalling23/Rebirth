@@ -43,7 +43,7 @@ public class ResourceStats: MonoBehaviour {
 			Debug.Log ("hovering");
 			resourceName.text = "OIL: ";
 			resourceType.text = "POLLUTION";
-			resourceStat.text = "CLEAN_UP_REWARDS\n + 1 FUEL";
+			resourceStat.text = "CLEAN_UP_REWARDS\n + 2 FUEL";
 
 		}
 		if (e.hoverResource is MangroveBehavior) {

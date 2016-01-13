@@ -5,7 +5,7 @@ using System.Collections;
 public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
 	public GameObject accessGM;
-
+	public GameObject accessFuel;
 
     public GameObject hover;
     public Color highlight;
@@ -78,7 +78,7 @@ public class PalmBehavior : MonoBehaviour, IResource, IPointerDownHandler {
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider)
             {
-				if (accessGM.GetComponent<GameMaster>().currentfuel >= 2) { 
+				if (accessFuel.GetComponent<Fuel>().currentfuel >= 2) { 
 	                Events.instance.Raise(new ClickResourceEvent(this));
 					Behavior();
 				}

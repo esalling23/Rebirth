@@ -56,7 +56,7 @@ public class TrashBehavior : MonoBehaviour, IResource, IPointerDownHandler {
             Debug.DrawLine(ray.origin, hit.point);
             if (hit.collider)
             {
-				if (accessGM.GetComponent<GameMaster>().currentfuel <= 10) { 
+				if (accessGM.GetComponent<Fuel>().currentfuel <= 10) { 
 	                Events.instance.Raise(new ClickResourceEvent(this));
 	                Debug.Log("yes trash!");
 					gameObject.SetActive(false);

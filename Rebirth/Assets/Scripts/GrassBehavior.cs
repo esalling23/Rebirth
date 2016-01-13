@@ -6,6 +6,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 
 	public static GrassBehavior grassAccess;
 	public GameObject accessGM;
+	public GameObject accessFuel;
 
 	private BoxCollider collider;
 
@@ -85,7 +86,7 @@ public class GrassBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 		if (Physics.Raycast (ray, out hit, 2f)) {
 			Debug.DrawLine (ray.origin, hit.point);
 			if (hit.collider) {
-				if (accessGM.GetComponent<GameMaster>().currentfuel >= 2) { 
+				if (accessFuel.GetComponent<Fuel>().currentfuel >= 2) { 
 					Events.instance.Raise (new ClickResourceEvent (this));
 					Debug.Log ("yes grass!");
 					Behavior();

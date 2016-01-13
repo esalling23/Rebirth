@@ -37,7 +37,7 @@ public class MouseLook : MonoBehaviour {
 	{	
 //		if (GrassGrow.access.rightClicked != true) {
 
-			Cursor.lockState = CursorLockMode.Confined;
+		Cursor.lockState = CursorLockMode.Locked;
 		//}
 
 		if (axes == RotationAxes.MouseXAndY)

@@ -4,23 +4,18 @@ using UnityEngine.EventSystems;
 using System.Collections;
 
 public class GameMaster : MonoBehaviour {
-	
-	public static GameMaster accessGM; 
 
-	public Slider healthslider;
-	public Slider fuelslider;
-	
-	public Text fuelcount;
-	public Text healthcount;
-	//public Text playerStats;
-	public GameObject Player;
-	public GameObject deadScreen;
-	
-	private int maxhealth = 100;
-	public int currenthealth;
+	public GameObject accessFuel;
+//	public Slider healthslider;
+//
+//	public Text healthcount;
+//	//public Text playerStats;
+//	public GameObject Player;
+//	public GameObject deadScreen;
+//	
+//	private int maxhealth = 100;
+//	public int currenthealth;
 
-	public int currentfuel;
-	private int maxfuel = 10;
 
 	public GameObject grass;
 	private bool grassAppear = false;
@@ -118,18 +113,13 @@ public class GameMaster : MonoBehaviour {
 //		healthslider.value = currenthealth;
 //		healthcount.text = currenthealth.ToString();
 
-		currentfuel = 0;
-		fuelslider.value = currentfuel;
-		fuelcount.text = currentfuel.ToString();
+
 //
 //		healthLoss = HealthLoss();
 //		healthGain = HealthGain ();
 
 		Events.instance.AddListener<ClickResourceEvent>
 			(OnClickResourceEvent);
-
-		//grassanim = grass.GetComponent<Animator>();
-		//palmsanim = palms.GetComponent<Animator>();
 
 	}
 
@@ -191,22 +181,15 @@ public class GameMaster : MonoBehaviour {
 //		Player.GetComponent<CharacterMotorC> ().enabled = false;
 //	}
 
-	public void Fuel(int num) {
-		//while (currentfuel > 0 )
-			currentfuel += num;
-			fuelslider.value = currentfuel;
-			fuelcount.text = currentfuel.ToString ();
-	//	}
-	}
+
 
 
 	
 	void OnClickResourceEvent(ClickResourceEvent e) {
 		if (e.resource is GrassBehavior) {
-			if (currentfuel >= 2) {
+			if (accessFuel.GetComponent<Fuel>().currentfuel >= 2) {
 				grassRemaining -= 1;
-				Fuel (-2);
-				Debug.Log (currentfuel + " fuel and " + grassRemaining + " grass remaining");
+				Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + grassRemaining + " grass remaining");
 				if (grassRemaining == grassStart/2 && palmsAppear == false) {
 					Debug.Log ("palms appearing");
 					iTween.MoveBy(palms,iTween.Hash(
@@ -253,11 +236,11 @@ public class GameMaster : MonoBehaviour {
 			}
 		}
 		if (e.resource is OilBehavior) {
-			if (currentfuel < maxfuel) {
+			if (accessFuel.GetComponent<Fuel>().currentfuel < accessFuel.GetComponent<Fuel>().maxfuel) {
 				oilRemaining -= 1;
-				Fuel (2);
-				Debug.Log (currentfuel + " fuel and " + oilRemaining + " oil remaining");
-				if (currentfuel >= 8 && grassAppear == false) {
+				accessFuel.GetComponent<Fuel>().Fueling (2);
+				Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + oilRemaining + " oil remaining");
+				if (accessFuel.GetComponent<Fuel>().currentfuel >= 8 && grassAppear == false) {
 					Debug.Log ("grass appearing");
 					iTween.MoveBy(grass,iTween.Hash(
 						"y"   , .15,
@@ -275,26 +258,26 @@ public class GameMaster : MonoBehaviour {
 			}
 		}
 		if (e.resource is MangroveBehavior) {
-				if (mangroveRemaining == 0 && currentfuel == 10) {
+			if (mangroveRemaining == 0 && accessFuel.GetComponent<Fuel>().currentfuel == 10) {
 					shrimpRemaining -= 1;
-					Fuel (-10);
-					Debug.Log (currentfuel + " fuel and " + shrimpRemaining + " shrimp remaining");
+					accessFuel.GetComponent<Fuel>().Fueling (-10);
+				Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + shrimpRemaining + " shrimp remaining");
 				} else {
 					if (mangroveRemaining >= 1) {
 						mangroveRemaining -= 1;
-						Fuel (-8);
-						Debug.Log (currentfuel + " fuel and " + mangroveRemaining + " mangrove remaining");
+						accessFuel.GetComponent<Fuel>().Fueling (-8);
+					Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + mangroveRemaining + " mangrove remaining");
 					}
 			}
 
 		}
 		if (e.resource is TrashBehavior)
 		{
-			if (currentfuel < maxfuel) {
+			if (accessFuel.GetComponent<Fuel>().currentfuel < accessFuel.GetComponent<Fuel>().maxfuel) {
 				trashRemaining -= 1;
-				Fuel (4);
-				Debug.Log (currentfuel + " fuel and " + trashRemaining + " trash remaining");
-				if (currentfuel >= 8 && grassAppear == false) {
+				accessFuel.GetComponent<Fuel>().Fueling (4);
+				Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + trashRemaining + " trash remaining");
+				if (accessFuel.GetComponent<Fuel>().currentfuel >= 8 && grassAppear == false) {
 					Debug.Log ("grass appearing");
 					iTween.MoveBy(grass,iTween.Hash(
 						"y"   , .1,
@@ -312,10 +295,10 @@ public class GameMaster : MonoBehaviour {
 		}
 		if (e.resource is BigTrashBehavior)
 		{
-			if (currentfuel <= 4) {
+			if (accessFuel.GetComponent<Fuel>().currentfuel <= 4) {
 				bigTrashRemaining -= 1;
-				Fuel (6);
-				Debug.Log (currentfuel + " fuel and " + bigTrashRemaining + " bigTrash remaining");
+				accessFuel.GetComponent<Fuel>().Fueling (6);
+				Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + bigTrashRemaining + " bigTrash remaining");
 			} else {
 				Debug.Log ("NO!");
 
@@ -325,10 +308,10 @@ public class GameMaster : MonoBehaviour {
 		}
 		if (e.resource is PalmBehavior)
 		{
-			if (currentfuel >= 4) {
+			if (accessFuel.GetComponent<Fuel>().currentfuel >= 4) {
 				palmRemaining -= 1;
-				Fuel (-4);
-				Debug.Log (currentfuel + " fuel and " + palmRemaining + " palms remaining");
+				accessFuel.GetComponent<Fuel>().Fueling (-4);
+				Debug.Log (accessFuel.GetComponent<Fuel>().currentfuel + " fuel and " + palmRemaining + " palms remaining");
 				if (palmRemaining == palmStart/2 && palmsTwoAppear == false) {
 					Debug.Log ("palms2 appearing");
 					iTween.MoveBy(palmsTwo,iTween.Hash(

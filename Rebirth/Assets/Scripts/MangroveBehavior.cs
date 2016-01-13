@@ -5,6 +5,7 @@ using System.Collections;
 public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 
 	public GameObject accessGM;
+	public GameObject accessFuel;
 
 	public Color color;
 	public Color highlight;
@@ -83,7 +84,7 @@ public class MangroveBehavior : MonoBehaviour, IResource, IPointerDownHandler {
 		if (Physics.Raycast (ray, out hit, 2f)) {
 			Debug.DrawLine (ray.origin, hit.point);
 			if (hit.collider) {
-				if (accessGM.GetComponent<GameMaster>().currentfuel >= 8) {
+				if (accessFuel.GetComponent<Fuel>().currentfuel >= 8) {
 					Events.instance.Raise (new ClickResourceEvent (this));
 					Debug.Log ("yes mangrow!");
 //					if (accessGM.GetComponent<GameMaster>().mangroveRemaining == 0 && accessGM.GetComponent<GameMaster>().currentfuel >= 8) {
