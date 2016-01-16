@@ -19,28 +19,34 @@ public class EnvironmentInfo: MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		PrintDirection ();
 		PrintTime ();
-		compassDirection = compassNeedle.transform.eulerAngles.y;
-		playerDirection = player.transform.localEulerAngles;
+		CompassRotate ();
+
+
+		//playerDirection = player.transform.localEulerAngles;
 		direction = Mathf.Round(player.transform.localEulerAngles.y);
 		playerPosition = player.transform.position;
+		compassDirection = Mathf.Round(compassNeedle.transform.localEulerAngles.z);
+
+
 		if (Input.GetKeyDown (KeyCode.D)) {
 			Debug.Log (playerDirection.ToString ());
 			Debug.Log (direction.ToString ());
 			Debug.Log (playerPosition.ToString ());
-
+			Debug.Log (compassDirection.ToString());
 		}
 
 
 	}
 
 	void CompassRotate() {
-		compassDirection == direction;
+		compassDirection = direction;
 	}
 
 	void PrintTime () {
@@ -69,19 +75,19 @@ public class EnvironmentInfo: MonoBehaviour {
 				Debug.Log ("north");
 			}
 		} 
-		else if (direction >= 45 || direction <= 134) {
+		if (direction >= 45 && direction <= 134) {
 			compass.text = "E";
 			if (Input.GetKeyDown (KeyCode.D)) {
 				Debug.Log ("east");
 			}
 		} 
-		else if (direction >= 135 || direction <= 224) {
+		if (direction >= 135 && direction <= 224) {
 			compass.text = "S";
 			if (Input.GetKeyDown (KeyCode.D)) {
 				Debug.Log ("south");
 			}
 		} 
-		else if (direction >= 225 || direction <= 314) {
+		if (direction >= 225 && direction <= 314) {
 			compass.text = "W";
 			if (Input.GetKeyDown (KeyCode.D)) {
 				Debug.Log ("west");
