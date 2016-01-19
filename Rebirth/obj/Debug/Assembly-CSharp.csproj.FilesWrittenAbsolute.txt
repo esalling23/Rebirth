@@ -17,3 +17,7 @@
 /Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/obj/Debug/Assembly-CSharp.dll
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/obj/Debug/Assembly-CSharp.dll.mdb

@@ -34,3 +34,9 @@
 /Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
 /Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll
 /Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/UnityEditor.iOS.Extensions.Xcode.dll.mdb
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Assembly-CSharp-Editor.dll.mdb
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Assembly-CSharp-Editor.dll
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/obj/Debug/Assembly-CSharp-Editor.dll
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/obj/Debug/Assembly-CSharp-Editor.dll.mdb
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/ericasalling/Developer/Repositories/Rebirth/Rebirth/Temp/bin/Debug/Assembly-CSharp.dll.mdb

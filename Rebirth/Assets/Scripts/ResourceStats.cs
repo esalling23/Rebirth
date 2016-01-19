@@ -31,12 +31,9 @@ public class ResourceStats: MonoBehaviour {
 	}
 
 	void OnHoverResourceEvent(HoverResourceEvent e) {
-		if (e.hoverResource is GrassBehavior) {
-			Debug.Log ("hovering");
-			resourceName.text = "GRASS: ";
-			resourceType.text = "PLANT_SPECIES";
-			resourceStat.text = "REHAB_COSTS\n - 2 FUEL";
-
+		if (e.hoverResource is SandBehavior) {
+			Debug.Log ("hovering land");
+			resourceName.text = "ROCK";
 
 		}
 		if (e.hoverResource is OilBehavior) {
