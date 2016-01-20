@@ -8,6 +8,12 @@ public class DNASpotPlacement : MonoBehaviour {
 	public float exploreWidth;
 	public float exploreLength;
 
+	private float randomWidth;
+	private float randomLength;
+
+	private float islandBoundsW;
+	private float islandBoundsL;
+
 	public int loopRandom;
 	public int loopMin;
 	public int loopMax;
@@ -15,11 +21,13 @@ public class DNASpotPlacement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		explorableOcean = GameObject.FindGameObjectWithTag ("ExploreOcean");
-		exploreWidth = Mathf.Round(Random.Range (8F, 12F));
-		exploreLength = Mathf.Round(Random.Range (8F, 14F));
-		explorableOcean.transform.localScale += new Vector3 (exploreWidth, 1F, exploreLength);
+		exploreWidth = Mathf.Round(Random.Range (80F, 160F));
+		exploreLength = Mathf.Round(Random.Range (80F, 180F));
+		explorableOcean.transform.localScale += new Vector3 (exploreWidth, 0F, exploreLength);
 		Debug.Log (explorableOcean.transform.localScale.x.ToString ()); 
 		Debug.Log (explorableOcean.transform.localScale.z.ToString ()); 
+		randomWidth = Random.Range (-exploreWidth, exploreWidth);
+		randomLength = Random.Range(-exploreLength, exploreLength);
 
 
 		loopMin = Random.Range (3, 12);
@@ -36,7 +44,8 @@ public class DNASpotPlacement : MonoBehaviour {
 	}
 
 	void SpawnDNASpot(){
-		Vector3 position = new Vector3(Random.Range(-exploreWidth, exploreWidth), 1, Random.Range(-exploreLength, exploreLength));
+		Vector3 position = new Vector3(randomWidth, -4, Random.Range(-exploreLength, exploreLength));
+
 		Instantiate (oceanDNAPrefab, position, Quaternion.identity);
 	}
 

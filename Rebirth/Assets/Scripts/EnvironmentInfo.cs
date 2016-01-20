@@ -17,59 +17,53 @@ public class EnvironmentInfo: MonoBehaviour {
 	public Text compass;
 	public Text theTime;
 
-	public GameObject soil;
-	public GameObject sand;
-
+//	public GameObject soil;
+//	public GameObject sand;
+//	public GameObject rock;
+	//public GameObject oil;
 
 	public List<GameObject> sandCubes = new List<GameObject>();
 	public List<GameObject> soilCubes = new List<GameObject>();
 	public List<GameObject> oilCubes = new List<GameObject>();
 	public Color color;
 	public Color soilColor;
+	public Color rockColor;
+	public Color sandColor;
+
 
 
 	public int loopRandom;
 	public int loopMin;
 	public int loopMax;
-	public int index;
+
+	public int oilIndex;
+	public int soilIndex;
 	public int sandCubesTotal;
 
 	private GameObject oilCube;
+	private GameObject soilCube;
+	private GameObject sandCube;
 
 
 	// Use this for initialization
 	void Start () {
 		sandCubes.AddRange(GameObject.FindGameObjectsWithTag ("Sand"));
 		sandCubesTotal = sandCubes.Count;
-		loopMin = sandCubesTotal;
-		loopMax = 5;
+		loopMax = 27;
+		loopMin = 10;
 		loopRandom = Random.Range (loopMin, loopMax);
 
-		for (int i = 0; i < loopRandom; i++) {
+		//for (int i = 0; i < loopRandom; i++) {
 			OilSpillPlacement ();
-
-		}
+			//SoilPlacement ();
+		//}
 		soilCubes.AddRange(GameObject.FindGameObjectsWithTag ("Soil"));
-		oilCubes.AddRange(GameObject.FindGameObjectsWithTag ("Oil"));
+		//oilCubes.AddRange(GameObject.FindGameObjectsWithTag ("Oil"));
 
-		//Random index = new Random ();
+		Debug.Log (oilCubes.Count.ToString () + "oil cubes");
+		Debug.Log (sandCubesTotal.ToString () + "sand cubes");
 
-		foreach (GameObject oilCube in oilCubes) {
-			iTween.ColorTo (oilCube, iTween.Hash (
-				"color", color
-			));
-			oilCube.GetComponent<TextureCreator>().frequency = 15;
-
-		}
-		foreach (GameObject soilCube in soilCubes) {
-			iTween.ColorTo (soilCube, iTween.Hash (
-				"color", soilColor
-			));
-
-			soilCube.GetComponent<TextureCreator>().frequency = 5;
-		}
-
-
+		ColorCubes ();
 
 	}
 
@@ -93,28 +87,64 @@ public class EnvironmentInfo: MonoBehaviour {
 			Debug.Log (playerPosition.ToString ());
 			Debug.Log (compassDirection.ToString ());
 			Debug.Log (sandCubes.Count.ToString ());
-			Debug.Log (oilCubes.Count.ToString ());
+			Debug.Log (oilCubes.Count.ToString () + "oil cubes");
 			Debug.Log (soilCubes.Count.ToString ());
 			Debug.Log (loopRandom.ToString ());
-			Debug.Log (sandCubesTotal.ToString ());
+			Debug.Log (sandCubesTotal.ToString () + "sand cubes");
 			Debug.Log (oilCube.transform.position.ToString ());
-			Debug.Log (index.ToString ());
+			Debug.Log (soilIndex.ToString ());
+
 		}
 	}
 
 	public void OilSpillPlacement () {
 		//Random random = new Random ();
-		index = Random.Range (0, sandCubesTotal);
-		oilCube = sandCubes [index];
+		oilIndex = Random.Range (0, sandCubesTotal);
+		Debug.Log (oilIndex.ToString () + " is the oil index");
+		oilCube = sandCubes [oilIndex];
+		sandCubes.RemoveAt (oilIndex);
 		oilCube.tag = "Oil";
 		oilCubes.Add (oilCube);
 
+
+
 	}
+
+	public void ColorCubes() {
+		foreach (GameObject oilCube in oilCubes) {
+			iTween.ColorTo (oilCube, iTween.Hash (
+				"color", color
+			));
+			oilCube.GetComponent<TextureCreator>().frequency = 15;
+			//Debug.Log ("oil colored");
+		}
+		foreach (GameObject soilCube in soilCubes) {
+			iTween.ColorTo (soilCube, iTween.Hash (
+				"color", soilColor
+			));
+
+			soilCube.GetComponent<TextureCreator>().frequency = 5;
+		}
+		foreach (GameObject sandCube in sandCubes) {
+			iTween.ColorTo (sandCube, iTween.Hash (
+				"color", sandColor
+			));
+
+			sandCube.GetComponent<TextureCreator>().frequency = 100;
+		}
+	}
+
+
+
 
 	public void SoilPlacement () {
-
+		soilIndex = Random.Range (0, sandCubesTotal);
+		soilCube = sandCubes [soilIndex];
+		soilCube.tag = "Soil";
+		sandCubes.RemoveAt (soilIndex);
+		soilCubes.Add (soilCube);
+			
 	}
-
 	void CompassRotate() {
 		compassDirection = direction;
 	}

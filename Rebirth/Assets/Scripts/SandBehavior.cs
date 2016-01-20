@@ -39,7 +39,7 @@ public class SandBehavior : MonoBehaviour, IPointerDownHandler, IResource {
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (Physics.Raycast (ray, out hit, 2f)) {
+		if (Physics.Raycast (ray, out hit, 4f)) {
 			Debug.DrawLine (ray.origin, hit.point);
 			if (hit.collider) {
 				Events.instance.Raise (new ClickLandEvent (this));

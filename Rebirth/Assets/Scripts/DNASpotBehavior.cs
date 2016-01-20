@@ -19,10 +19,10 @@ public class DNASpotBehavior : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter (Collider collider) {
-		if (collider.gameObject.tag == "DNASpot" || collider.gameObject.tag == "Soil" || collider.gameObject.tag == "Sand" || collider.gameObject.tag == "Oil") {
-			this.transform.position = new Vector3 (Random.Range (-exploreWidth, exploreWidth), -4, Random.Range (-exploreLength, exploreLength));
-		}
-	}
+//	void OnTriggerStay (Collider collider) {
+//		if (collider.gameObject.tag == "DNASpot" || collider.gameObject.tag == "Soil" || collider.gameObject.tag == "Sand" || collider.gameObject.tag == "Oil") {
+//			this.transform.position = new Vector3 (Random.Range (-exploreWidth, exploreWidth), -4, Random.Range (-exploreLength, exploreLength));
+//		}
+//	}
 
 }

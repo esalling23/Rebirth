@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\FPSInputControllerC.cs" />
      <Compile Include="Assets\Scripts\Fuel.cs" />
      <Compile Include="Assets\Scripts\GameMaster.cs" />
+     <Compile Include="Assets\Scripts\GenerateArea.cs" />
      <Compile Include="Assets\Scripts\GrassBuild.cs" />
      <Compile Include="Assets\Scripts\HoverResourceEvent.cs" />
      <Compile Include="Assets\Scripts\IResource.cs" />
