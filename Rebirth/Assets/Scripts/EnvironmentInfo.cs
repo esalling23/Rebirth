@@ -36,7 +36,7 @@ public class EnvironmentInfo: MonoBehaviour {
 	public int loopMin;
 	public int loopMax;
 
-	public int oilIndex;
+	//public int oilIndex;
 	public int soilIndex;
 	public int sandCubesTotal;
 
@@ -99,7 +99,7 @@ public class EnvironmentInfo: MonoBehaviour {
 
 	public void OilSpillPlacement () {
 		//Random random = new Random ();
-		oilIndex = Random.Range (0, sandCubesTotal);
+		int oilIndex = Mathf.FloorToInt(Random.value*(float)sandCubesTotal);
 		Debug.Log (oilIndex.ToString () + " is the oil index");
 		oilCube = sandCubes [oilIndex];
 		sandCubes.RemoveAt (oilIndex);

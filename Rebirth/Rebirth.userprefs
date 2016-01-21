@@ -2,15 +2,15 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnvironmentInfo.cs">
     <Files>
-      <File FileName="Assets/Scripts/EnvironmentInfo.cs" Line="103" Column="58" />
+      <File FileName="Assets/Scripts/EnvironmentInfo.cs" Line="102" Column="34" />
       <File FileName="Assets/Scripts/TimeControl.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/ResourceStats.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameMaster.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/SandBehavior.cs" Line="42" Column="39" />
-      <File FileName="Assets/Scripts/DNASpotPlacement.cs" Line="28" Column="1" />
+      <File FileName="Assets/Scripts/SandBehavior.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/DNASpotPlacement.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/DevScript/GrassBehavior.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/DNASpotBehavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GenerateArea.cs" Line="34" Column="47" />
+      <File FileName="Assets/Scripts/GenerateArea.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
