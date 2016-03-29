@@ -5,8 +5,8 @@ public class DayNightCycle : MonoBehaviour {
 
 	// The directional light which we manipulate as our sun.
 	public Light sun;
-	private int dayCount = 1;
-	private int year = 2893;
+	public int dayCount = 1;
+	public int year = 2893;
 
 	// The number of real-world seconds in one full game day.
 	// Set this to 86400 for a 24-hour realtime day.
@@ -44,6 +44,11 @@ public class DayNightCycle : MonoBehaviour {
 		if (dayCount >= 365) {
 			year++;
 			dayCount = 1;
+		}
+
+		if (Input.GetKeyDown (KeyCode.T)) {
+			Debug.Log ("day " + dayCount);
+			Debug.Log ("time is " + (currentTimeOfDay * 24));
 		}
 	}
 

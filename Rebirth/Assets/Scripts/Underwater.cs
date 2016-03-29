@@ -6,7 +6,7 @@ public class Underwater : MonoBehaviour {
 	//This script enables underwater effects. Attach to main camera.
 
 	//Define variable
-	public int underwaterLevel = -1;
+	public int underwaterLevel = 0;
 	public Color color;
 
 	//The scene's default fog settings

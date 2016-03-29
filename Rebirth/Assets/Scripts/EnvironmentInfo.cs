@@ -25,6 +25,7 @@ public class EnvironmentInfo: MonoBehaviour {
 	public List<GameObject> sandCubes = new List<GameObject>();
 	public List<GameObject> soilCubes = new List<GameObject>();
 	public List<GameObject> oilCubes = new List<GameObject>();
+	public List<GameObject> marshCubes = new List<GameObject>();
 	public Color color;
 	public Color soilColor;
 	public Color rockColor;
@@ -44,26 +45,38 @@ public class EnvironmentInfo: MonoBehaviour {
 	private GameObject soilCube;
 	private GameObject sandCube;
 
+	public GameObject invasiveReedSpecies;
+	public GameObject invasivePalmSpecies;
+
 
 	// Use this for initialization
 	void Start () {
 		sandCubes.AddRange(GameObject.FindGameObjectsWithTag ("Sand"));
 		sandCubesTotal = sandCubes.Count;
+		Debug.Log (sandCubesTotal.ToString () + "sand cubes at start");
+
+		//marshCubes.AddRange(GameObject.FindGameObjectsWithTag ("marsh"));
+		soilCubes.AddRange(GameObject.FindGameObjectsWithTag ("Soil"));
+		//InvasiveReedPlacement ();
+
 		loopMax = 27;
 		loopMin = 10;
 		loopRandom = Random.Range (loopMin, loopMax);
 
-		//for (int i = 0; i < loopRandom; i++) {
-			OilSpillPlacement ();
-			//SoilPlacement ();
-		//}
-		soilCubes.AddRange(GameObject.FindGameObjectsWithTag ("Soil"));
-		//oilCubes.AddRange(GameObject.FindGameObjectsWithTag ("Oil"));
+//		for (int i = 0; i < 8; i++) {
+//			OilSpillPlacement ();
+//			Debug.Log ("placing oil");
+//		}
+//		for (int i = 0; i < 5; i++) {
+//			SoilPlacement ();
+//		}
+//		ColorCubes ();
+//
+//		InvasivePalmPlacement ();
 
 		Debug.Log (oilCubes.Count.ToString () + "oil cubes");
 		Debug.Log (sandCubesTotal.ToString () + "sand cubes");
 
-		ColorCubes ();
 
 	}
 
@@ -78,8 +91,8 @@ public class EnvironmentInfo: MonoBehaviour {
 		//playerDirection = player.transform.localEulerAngles;
 		direction = Mathf.Round(player.transform.localEulerAngles.y);
 		playerPosition = player.transform.position;
-		compassDirection = Mathf.Round(compassNeedle.transform.localEulerAngles.z);
-
+		compassDirection = compassNeedle.transform.localEulerAngles.z;
+		sandCubesTotal = sandCubes.Count;
 
 		if (Input.GetKeyDown (KeyCode.R)) {
 			Debug.Log (playerDirection.ToString ());
@@ -98,16 +111,46 @@ public class EnvironmentInfo: MonoBehaviour {
 	}
 
 	public void OilSpillPlacement () {
+		sandCubesTotal = sandCubes.Count;
+		Debug.Log (sandCubesTotal.ToString () + " sand cubes then");
+
 		//Random random = new Random ();
 		int oilIndex = Mathf.FloorToInt(Random.value*(float)sandCubesTotal);
 		Debug.Log (oilIndex.ToString () + " is the oil index");
 		oilCube = sandCubes [oilIndex];
 		sandCubes.RemoveAt (oilIndex);
+		sandCubesTotal = sandCubes.Count;
+		Debug.Log (sandCubesTotal.ToString () + " sand cubes now");
 		oilCube.tag = "Oil";
 		oilCubes.Add (oilCube);
+	}
 
+	public void SoilPlacement () {
+		int soilIndex = Mathf.FloorToInt(Random.value*(float)sandCubesTotal);
+		Debug.Log (soilIndex.ToString () + " is the soil index");
+		soilCube = sandCubes [soilIndex];
+		sandCubes.RemoveAt (soilIndex);
+		soilCube.tag = "Soil";
+		soilCubes.Add (soilCube);
 
+	}
 
+	public void InvasiveReedPlacement () {
+		marshCubes.AddRange(GameObject.FindGameObjectsWithTag ("marsh"));
+
+		foreach (GameObject marsh in marshCubes) {
+			Vector3 position = new Vector3(marsh.transform.position.x + Random.Range(-1, 1), 0, marsh.transform.position.z + Random.Range(-1, 1));
+//			Quaternion rotation = new Vector3 (0, Random.Range (0, 180), 0);
+			Instantiate (invasiveReedSpecies, position, Quaternion.identity);
+		}
+	}
+
+	public void InvasivePalmPlacement () {
+		foreach (GameObject soilCube in soilCubes) {
+			Vector3 position = new Vector3(soilCube.transform.position.x + Random.Range(-3, 3), 2, soilCube.transform.position.z + Random.Range(-3, 3));
+
+			Instantiate (invasivePalmSpecies, position, Quaternion.identity);
+		}
 	}
 
 	public void ColorCubes() {
@@ -133,18 +176,7 @@ public class EnvironmentInfo: MonoBehaviour {
 			sandCube.GetComponent<TextureCreator>().frequency = 100;
 		}
 	}
-
-
-
-
-	public void SoilPlacement () {
-		soilIndex = Random.Range (0, sandCubesTotal);
-		soilCube = sandCubes [soilIndex];
-		soilCube.tag = "Soil";
-		sandCubes.RemoveAt (soilIndex);
-		soilCubes.Add (soilCube);
-			
-	}
+		
 	void CompassRotate() {
 		compassDirection = direction;
 	}
