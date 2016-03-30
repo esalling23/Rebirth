@@ -7,10 +7,11 @@ public class InvasiveReedBehavior : MonoBehaviour, IPointerDownHandler, IResourc
 //	public GameObject roots;
 //	public GameObject hoverRoots;
 	public GameObject reed;
-	DayNightCycle controller;
+	public GameObject control;
+//	DayNightCycle controller;
 	// Use this for initialization
 	void Start () {
-		controller = GameObject.Find("GameMaster").GetComponent<DayNightCycle>();
+//		controller = GameObject.Find("GameMaster").GetComponent<DayNightCycle>();
 
 	}
 	
@@ -20,9 +21,16 @@ public class InvasiveReedBehavior : MonoBehaviour, IPointerDownHandler, IResourc
 	}
 
 	public void Behavior () {
-		controller.currentTimeOfDay += .1f;
+		Debug.Log (control.GetComponent<DayNightCycle> ().currentTimeOfDay);
+		control.GetComponent<DayNightCycle> ().currentTimeOfDay += .1f;
+		Debug.Log (control.GetComponent<DayNightCycle> ().currentTimeOfDay);
+//		controller.currentTimeOfDay += .1f;
+//		Debug.Log (control.GetComponent<DayNightCycle> ().currentTimeOfDay);
 		Destroy (reed);
-
+		Debug.Log ("destroyed reed");
+		control.GetComponent<CameraViewControl>().ModeChange();
+		control.GetComponent<CameraViewControl>().ModeSetup();
+		Debug.Log (control.GetComponent<CameraViewControl>().povMode);
 	} 
 
 	public void OnMouseEnter () {
@@ -48,7 +56,7 @@ public class InvasiveReedBehavior : MonoBehaviour, IPointerDownHandler, IResourc
 		if (Physics.Raycast (ray, out hit, 4f)) {
 			Debug.DrawLine (ray.origin, hit.point);
 			if (hit.collider) {
-				Events.instance.Raise (new ClickLandEvent (this));
+				//Events.instance.Raise (new ClickResourceEvent (this));
 				Debug.Log ("clicked roots of reed!");
 				Behavior();
 			}

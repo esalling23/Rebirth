@@ -33,19 +33,19 @@ public class ResourceStats: MonoBehaviour {
 	void OnHoverResourceEvent(HoverResourceEvent e) {
 		if (e.hoverResource is SandBehavior) {
 			Debug.Log ("hovering land");
-			resourceName.text = "sand detected";
+			//resourceName.text = "sand detected";
 
 		}
 		if (e.hoverResource is OilBehavior) {
-			Debug.Log ("hovering");
-			resourceName.text = "oil detected";
+			Debug.Log ("hovering oil");
+			//resourceName.text = "oil detected";
 //			resourceType.text = "POLLUTION";
 //			resourceStat.text = "CLEAN_UP_REWARDS\n + 2 FUEL";
 
 		}
 		if (e.hoverResource is InvasiveReedBehavior) {
-			Debug.Log ("hovering invasive");
-			resourceName.text = "invasive reed species detected";
+			Debug.Log ("hovering invasive reed");
+			//resourceName.text = "invasive reed species detected";
 		}
 //		if (e.hoverResource is MangroveBehavior) {
 //			Debug.Log ("hovering");
@@ -59,15 +59,12 @@ public class ResourceStats: MonoBehaviour {
 //				resourceStat.text = "REHAB_COSTS\n - 6 FUEL";
 //			}
 //		}
-//        if (e.hoverResource is TrashBehavior)
-//        {
-//			Debug.Log ("hovering");
+      if (e.hoverResource is TrashBehavior) {
+			Debug.Log ("hovering trash");
 //			resourceName.text = "TRASH: ";
 //			resourceType.text = "POLLUTION";
 //			resourceStat.text = "CLEAN_UP_REWARDS\n + 2 FUEL";
-//
-//
-//		}
+		}
 //		if (e.hoverResource is BigTrashBehavior)
 //		{
 //			Debug.Log ("hovering");
@@ -84,10 +81,10 @@ public class ResourceStats: MonoBehaviour {
 //			resourceType.text = "PLANT_SPECIES";
 //			resourceStat.text = "REHAB_COSTS\n + 4 FUEL";
 //		}
-		if (e.hoverResource is InvasiveSpecies) 
-		{
-			Debug.Log ("hovering invasive reed");
-		}
-       
+//		if (e.hoverResource is InvasiveSpecies) 
+//		{
+//			Debug.Log ("hovering invasive reed");
+//		}
+//       
     }
 }

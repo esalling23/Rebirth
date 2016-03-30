@@ -8,6 +8,8 @@ public class DayNightCycle : MonoBehaviour {
 	public int dayCount = 1;
 	public int year = 2893;
 
+	public GameObject view;
+
 	// The number of real-world seconds in one full game day.
 	// Set this to 86400 for a 24-hour realtime day.
 	public float secondsInFullDay = 120f;
@@ -30,25 +32,36 @@ public class DayNightCycle : MonoBehaviour {
 	}
 
 	void Update() {
-		// Updates the sun's rotation and intensity according to the current time of day.
-		UpdateSun();
 
-		// This makes currentTimeOfDay go from 0 to 1 in the number of seconds we've specified.
-		currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;
+		if (view.GetComponent<CameraViewControl> ().povMode == true) {
+			// Updates the sun's rotation and intensity according to the current time of day.
+			UpdateSun ();
 
-		// If currentTimeOfDay is 1 (midnight) set it to 0 again so we start a new day.
-		if (currentTimeOfDay >= 1) {
-			currentTimeOfDay = 0;
-			dayCount++;
-		}
-		if (dayCount >= 365) {
-			year++;
-			dayCount = 1;
-		}
+			// This makes currentTimeOfDay go from 0 to 1 in the number of seconds we've specified.
+			currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;
 
-		if (Input.GetKeyDown (KeyCode.T)) {
-			Debug.Log ("day " + dayCount);
-			Debug.Log ("time is " + (currentTimeOfDay * 24));
+			// If currentTimeOfDay is 1 (midnight) set it to 0 again so we start a new day.
+			if (currentTimeOfDay >= 1) {
+				currentTimeOfDay = 0;
+				dayCount++;
+			}
+			if (dayCount >= 365) {
+				year++;
+				dayCount = 1;
+			}
+
+			if (Input.GetKeyDown (KeyCode.T)) {
+				Debug.Log ("day " + dayCount);
+				Debug.Log ("time is " + (currentTimeOfDay * 24));
+			}
+
+		} else {
+			UpdateSun ();
+
+			if (Input.GetKeyDown (KeyCode.T)) {
+				Debug.Log ("day " + dayCount);
+				Debug.Log ("time is " + (currentTimeOfDay * 24));
+			}
 		}
 	}
 
@@ -58,7 +71,7 @@ public class DayNightCycle : MonoBehaviour {
 		// I just found that easier to work with.
 		// The y-axis determines where on the horizon the sun will rise and set.
 		// The z-axis does nothing.
-		sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 360f) - 90, 170, 0);
+		sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 360f) - 90, 90, 0);
 
 		// The following determines the sun's intensity according to current time of day.
 		// You'll notice I have hardcoded a bunch of values here. They were just the values
@@ -70,6 +83,7 @@ public class DayNightCycle : MonoBehaviour {
 		float intensityMultiplier = 1;
 		// Set intensity to 0 during the night night.
 		if (currentTimeOfDay <= 0.23f || currentTimeOfDay >= 0.75f) {
+			//Debug.Log ("its night time");
 			intensityMultiplier = 0;
 		}
 //		else if (currentTimeOfDay <= 0.32f || currentTimeOfDay >= 0.24f) {
@@ -87,10 +101,12 @@ public class DayNightCycle : MonoBehaviour {
 			// time as the currentTimeOfDay variable goes from 0.23 to 0.25. That way we get
 			// a perfect fade.
 			intensityMultiplier = Mathf.Clamp01((currentTimeOfDay - 0.23f) * (1 / 0.02f));
+			//Debug.Log ("run rising");
 		}
 		// And fade it out when it sets.
 		else if (currentTimeOfDay >= 0.73f) {
 			intensityMultiplier = Mathf.Clamp01(1 - ((currentTimeOfDay - 0.73f) * (1 / 0.02f)));
+			//Debug.Log ("sun setting");
 		}
 
 		// Multiply the intensity of the sun according to the time of day.
