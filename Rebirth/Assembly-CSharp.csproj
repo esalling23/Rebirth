@@ -68,7 +68,7 @@
      <Compile Include="Assets\Scripts\DevScript\OnClickCubeUI.cs" />
      <Compile Include="Assets\Scripts\DevScript\PalmBehavior.cs" />
      <Compile Include="Assets\Scripts\DevScript\SphericalGravity.cs" />
-     <Compile Include="Assets\Scripts\DevScript\TrashBehavior.cs" />
+     <Compile Include="Assets\Scripts\DevScript\TrashyBehavior.cs" />
      <Compile Include="Assets\Scripts\EnvironmentInfo.cs" />
      <Compile Include="Assets\Scripts\Events.cs" />
      <Compile Include="Assets\Scripts\FPSControllerEnhanced.cs" />
@@ -85,6 +85,7 @@
      <Compile Include="Assets\Scripts\LevelSetUp.cs" />
      <Compile Include="Assets\Scripts\LoadGame.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MangroveBehavior.cs" />
      <Compile Include="Assets\Scripts\OilEvent.cs" />
      <Compile Include="Assets\Scripts\OilManager.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
@@ -96,6 +97,7 @@
      <Compile Include="Assets\Scripts\TileSelect.cs" />
      <Compile Include="Assets\Scripts\TimeControl.cs" />
      <Compile Include="Assets\Scripts\Timing.cs" />
+     <Compile Include="Assets\Scripts\TrashBehavior.cs" />
      <Compile Include="Assets\Scripts\Underwater.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />

@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 public class CameraViewControl : MonoBehaviour {
 
-	public GameObject player;
-	public GameObject playerIndicator;
+	private GameObject player;
+	private GameObject playerIndicator;
 	public GameObject mapCamera;
 	public GameObject povCamera;
 	public GameObject land;
@@ -14,11 +14,22 @@ public class CameraViewControl : MonoBehaviour {
 	public GameObject povUI;
 	public GameObject mapUI;
 
+	public GameObject[] tiles;
+
+	public List<GameObject> trashList = new List<GameObject>();
+	public List<GameObject> reedList = new List<GameObject>();
+
+	public BoxCollider[] reedCollider;
+	public BoxCollider trashCollider;
+
 	public bool povMode = false;
 
 	//public GameObject[] tileSelects;
 	// Use this for initialization
 	void Start () {
+		tiles = GameObject.FindGameObjectsWithTag ("Tile");
+		playerIndicator = GameObject.Find ("PlayerIndicator");
+		player = GameObject.Find ("First Person Controller");
 		//tileSelects = GameObject.FindGameObjectsWithTag("Tile");
 //		playerIndicator.SetActive (true);
 //		povUI.SetActive (false);
@@ -31,7 +42,7 @@ public class CameraViewControl : MonoBehaviour {
 //		player.GetComponent<FPSInputControllerC> ().enabled = false;
 //
 //		Cursor.lockState = CursorLockMode.None;
-
+		povMode = false;
 		ModeSetup ();
 
 	}
@@ -49,13 +60,31 @@ public class CameraViewControl : MonoBehaviour {
 
 	public void ModeChange () {
 		povMode = !povMode;
+		foreach (GameObject tile in tiles) {
+			tile.GetComponent<TileSelect> ().TileReference ();
+//			Debug.Log ("checking tiles");
+		}
 	}
 
 	public void ModeSetup () {
 		if (povMode == true) {
-			//land.layer = 0;
-
-			playerIndicator.SetActive (false);
+			trashList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Trash"));
+			//Debug.Log (trashList.Count + " " + levelSetup.GetComponent<LevelSetUp> ().trashSpotList.Count);
+			reedList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Invasive"));
+			//Debug.Log (reedList.Count + " " + levelSetup.GetComponent<LevelSetUp> ().reedSpotList.Count);
+			foreach (GameObject reed in reedList) {
+				reedCollider = reed.GetComponentsInChildren<BoxCollider> ();
+				foreach (BoxCollider collider in reedCollider) {
+					
+					collider.enabled = true;
+//					Debug.Log ("reed collider enabled");
+				}
+//				reed.GetComponent<BoxCollider>().enabled = true;
+			}
+			foreach (GameObject trash in trashList) {
+				trash.GetComponent<BoxCollider>().enabled = true;
+			}
+			playerIndicator.GetComponent<Renderer> ().enabled = false;
 			povUI.SetActive (true);
 			mapUI.SetActive (false);
 			povCamera.SetActive (true);
@@ -68,9 +97,22 @@ public class CameraViewControl : MonoBehaviour {
 			Debug.Log ("POV Mode Enabled");
 
 		} else {
-			//land.layer = 2;
+			trashList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Trash"));
+			//Debug.Log (trashList.Count + " " + levelSetup.GetComponent<LevelSetUp> ().trashSpotList.Count);
+			reedList = new List<GameObject>(GameObject.FindGameObjectsWithTag("Invasive"));
+			//Debug.Log (reedList.Count + " " + levelSetup.GetComponent<LevelSetUp> ().reedSpotList.Count);
+			foreach (GameObject reed in reedList) {
+				reedCollider = reed.GetComponentsInChildren<BoxCollider> ();
+				foreach (BoxCollider collider in reedCollider) {
 
-			playerIndicator.SetActive (true);
+					collider.enabled = false;
+//					Debug.Log ("reed collider disabled");
+				}
+			}
+			foreach (GameObject trash in trashList) {
+				trash.GetComponent<BoxCollider>().enabled = false;
+			}
+			playerIndicator.GetComponent<Renderer> ().enabled = true;
 			povUI.SetActive (false);
 			mapUI.SetActive (true);
 			povCamera.SetActive (false);

@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
+
 
 public class DayNightCycle : MonoBehaviour {
 
 	// The directional light which we manipulate as our sun.
 	public Light sun;
+	private GameObject moon;
+	//public Light underwaterSun;
 	public int dayCount = 1;
 	public int year = 2893;
 
-	public GameObject view;
+	private GameObject view;
 
 	// The number of real-world seconds in one full game day.
 	// Set this to 86400 for a 24-hour realtime day.
@@ -22,16 +27,22 @@ public class DayNightCycle : MonoBehaviour {
 	public float currentTimeOfDay = 0;
 
 	// A multiplier other scripts can use to speed up and slow down the passing of time.
-	[HideInInspector]
+
 	public float timeMultiplier = 1f;
 
 	// Get the initial intensity of the sun so we remember it.
 	float sunInitialIntensity;
 	void Start() {
+		view = GameObject.Find ("GameMaster");
 		sunInitialIntensity = sun.intensity;
+		moon = GameObject.Find ("Moon");
 	}
 
 	void Update() {
+
+		if (Input.GetKeyDown (KeyCode.T)) {
+			Debug.Log ("time multiplier is at " + timeMultiplier);
+		}
 
 		if (view.GetComponent<CameraViewControl> ().povMode == true) {
 			// Updates the sun's rotation and intensity according to the current time of day.
@@ -83,8 +94,13 @@ public class DayNightCycle : MonoBehaviour {
 		float intensityMultiplier = 1;
 		// Set intensity to 0 during the night night.
 		if (currentTimeOfDay <= 0.23f || currentTimeOfDay >= 0.75f) {
-			//Debug.Log ("its night time");
+			
+//			if (Input.GetKeyDown (KeyCode.T)) {
+				//Debug.Log ("its night time");
+//			}
 			intensityMultiplier = 0;
+			moon.SetActive (true);
+
 		}
 //		else if (currentTimeOfDay <= 0.32f || currentTimeOfDay >= 0.24f) {
 //			intensityMultiplier = .5f;
@@ -94,6 +110,7 @@ public class DayNightCycle : MonoBehaviour {
 //		}
 		// Fade in the sun when it rises.
 		else if (currentTimeOfDay <= 0.25f) {
+			moon.SetActive (false);
 			// 0.02 is the amount of time between sunrise and the time we start fading out
 			// the intensity (0.25 - 0.23). By dividing 1 by that value we we get get 50.
 			// This tells us that we have to fade in the intensity 50 times faster than the
@@ -101,12 +118,13 @@ public class DayNightCycle : MonoBehaviour {
 			// time as the currentTimeOfDay variable goes from 0.23 to 0.25. That way we get
 			// a perfect fade.
 			intensityMultiplier = Mathf.Clamp01((currentTimeOfDay - 0.23f) * (1 / 0.02f));
-			//Debug.Log ("run rising");
+
+//			Debug.Log ("run rising");
 		}
 		// And fade it out when it sets.
 		else if (currentTimeOfDay >= 0.73f) {
 			intensityMultiplier = Mathf.Clamp01(1 - ((currentTimeOfDay - 0.73f) * (1 / 0.02f)));
-			//Debug.Log ("sun setting");
+//			Debug.Log ("sun setting");
 		}
 
 		// Multiply the intensity of the sun according to the time of day.
